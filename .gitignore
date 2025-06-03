@@ -65,9 +65,6 @@ coverage/
 # Ignore all image files in assets/img and subfolders
 assets/img/**/*.{png,jpg,jpeg,gif,svg,webp}
 
-# Do NOT ignore the folder itself
-!assets/img/
-!assets/img/**/
 
 
 includes/db.php
