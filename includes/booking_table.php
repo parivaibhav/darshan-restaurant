@@ -2,44 +2,48 @@
 session_start();
 include_once "db.php"; // defines $host, $username, $password, $db
 
-$conn = mysqli_connect($host, $username, $password, $db);
-
-if (!$conn) {
-    $_SESSION['msg'] = ['type' => 'error', 'text' => 'Database connection failed'];
-    redirect_user();
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name    = $_POST['name'] ?? '';
-    $email   = $_POST['email'] ?? '';
-    $phone   = $_POST['phone'] ?? '';
-    $date    = $_POST['date'] ?? '';
-    $time    = $_POST['time'] ?? '';
-    $people  = $_POST['people'] ?? '';
-    $message = $_POST['message'] ?? '';
+    // Sanitize and validate inputs
+    $name    = trim($_POST['name'] ?? '');
+    $email   = trim($_POST['email'] ?? '');
+    $phone   = trim($_POST['phone'] ?? '');
+    $date    = trim($_POST['date'] ?? '');
+    $time    = trim($_POST['time'] ?? '');
+    $people  = trim($_POST['people'] ?? '');
+    $message = trim($_POST['message'] ?? '');
 
-    $sql = "INSERT INTO bookings (name, email, phone, booking_date, booking_time, people, message)
-            VALUES ('$name', '$email', '$phone', '$date', '$time', '$people', '$message')";
+    // Basic required fields validation
+    if (empty($name) || empty($email)) {
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Name and Email are required'];
+        redirect_user();
+    }
 
-    if (mysqli_query($conn, $sql)) {
+    // Use prepared statements for security
+    $stmt = $conn->prepare("INSERT INTO bookings (name, email, phone, booking_date, booking_time, people, message)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssis", $name, $email, $phone, $date, $time, $people, $message);
+
+    if ($stmt->execute()) {
         $_SESSION['msg'] = ['type' => 'success', 'text' => 'Your table has been booked!'];
     } else {
-        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Error: ' . mysqli_error($conn)];
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Booking failed: ' . $stmt->error];
     }
+
+    $stmt->close();
 } else {
-    $_SESSION['msg'] = ['type' => 'error', 'text' => 'Invalid request'];
+    $_SESSION['msg'] = ['type' => 'error', 'text' => 'Invalid request method'];
 }
 
-mysqli_close($conn);
+$conn->close();
 redirect_user();
 
 // Function to redirect user
 function redirect_user()
 {
     if (isset($_SESSION['email'])) {
-        header("Location: ../client/index.php");
+        header("Location: /college/users/index");
     } else {
-        header("Location: ../index.php");
+        header("Location: /college/index");
     }
     exit;
 }

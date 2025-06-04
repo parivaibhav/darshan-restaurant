@@ -41,20 +41,43 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
 
 <body>
     <?php include 'header.php'; ?>
-    <div class="container border border-3  border-light-subtle my-3 rounded-3" style="padding: 90px;">
-        <h1 class="text-center py-2">Login in Your Account</h1>
-        <form action="includes/login.php" method="post" id="loginForm">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label ">Email address</label>
-                <input type="email" class="form-control py-3" id="exampleFormControlInput1" placeholder="name@example.com" name="useremail" required>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Login to Your Account</h2>
+
+                        <form action="includes/login.php" method="post" id="loginForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="useremail" class="form-label">Email address</label>
+                                <input type="email" class="form-control form-control-lg" id="useremail" name="useremail" placeholder="name@example.com" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
+                                <div class="invalid-feedback">
+                                    Password is required.
+                                </div>
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-danger btn-lg">Login</button>
+                            </div>
+
+                            <div class="text-end">
+                                <a href="/college/register" class="text-decoration-none">Don't have an account?</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Password</label>
-                <input type="password" class="form-control py-3" id="exampleFormControlInput1" placeholder="Enter your password" name="password" required>
-            </div>
-            <button class="btn btn-danger w-100 py-3">Login</button>
-            <a href="register.php" class="text-end w-100 text-end" style=" width:100%;text-align: right !important;">don't have an account?</a>
-        </form>
+        </div>
     </div>
 
 
@@ -101,8 +124,14 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
         </script>
         <?php unset($_SESSION['msg']); ?>
     <?php endif; ?>
-
-
+    <!-- Add this inside <body> -->
+    <div id="custom-cursor d-none d-lg-flex"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
+    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
+    <script src="./assets/js/cursoranimation.js"></script>  
 
 
 </body>

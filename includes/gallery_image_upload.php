@@ -14,11 +14,11 @@ if (isset($_POST['upload'])) {
         $conn->query("INSERT INTO gallery (file_path) VALUES ('$targetFile')")
     ) {
         $_SESSION['msg'] = ['type' => 'success', 'text' => 'Image uploaded successfully!'];
-        header("Location: ../admin/index.php");
+        header("Location: /college/admin/index");
         exit();
     } else {
         $_SESSION['msg'] = ['type' => 'error', 'text' => 'Failed to upload image.'];
-        header("Location: ../admin/index.php");
+        header("Location: /college/admin/index");
         exit();
     }
 }

@@ -61,13 +61,17 @@ shuffle($feedbacks);
             transform-origin: center;
         }
 
-        .testimonial-scroll-wrapper::-webkit-scrollbar {
-            display: none;
+        .testimonial-scroll-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: auto;
+            /* not smooth, animation handles smoothness */
+            scrollbar-width: none;
         }
 
-        .testimonial-scroll-wrapper {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .testimonial-scroll-wrapper::-webkit-scrollbar {
+            display: none;
         }
     </style>
 
@@ -274,77 +278,92 @@ shuffle($feedbacks);
         <!-- /Testimonials Section -->
 
         <!-- Events Section -->
-        <section id="events" class="events section">
-
+        <section id="events" class="events section py-5">
             <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+                <div class="position-relative">
 
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-                        {
-                            "loop": true,
-                            "speed": 600,
-                            "autoplay": {
-                                "delay": 5000
-                            },
-                            "slidesPerView": "auto",
-                            "pagination": {
-                                "el": ".swiper-pagination",
-                                "type": "bullets",
-                                "clickable": true
-                            },
-                            "breakpoints": {
-                                "320": {
-                                    "slidesPerView": 1,
-                                    "spaceBetween": 40
+                    <!-- Swiper -->
+                    <div class="swiper init-swiper">
+                        <script type="application/json" class="swiper-config">
+                            {
+                                "loop": true,
+                                "speed": 600,
+                                "autoplay": {
+                                    "delay": 5000
                                 },
-                                "1200": {
-                                    "slidesPerView": 3,
-                                    "spaceBetween": 1
+                                "navigation": {
+                                    "nextEl": ".custom-swiper-next",
+                                    "prevEl": ".custom-swiper-prev"
+                                },
+                                "pagination": {
+                                    "el": ".swiper-pagination",
+                                    "type": "bullets",
+                                    "clickable": true
+                                },
+                                "breakpoints": {
+                                    "320": {
+                                        "slidesPerView": 1,
+                                        "spaceBetween": 20
+                                    },
+                                    "768": {
+                                        "slidesPerView": 2,
+                                        "spaceBetween": 20
+                                    },
+                                    "1200": {
+                                        "slidesPerView": 3,
+                                        "spaceBetween": 30
+                                    }
                                 }
                             }
-                        }
-                    </script>
-                    <div class="swiper-wrapper">
+                        </script>
 
-                        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(../assets/img/events-1.jpg)">
-                            <h3>Custom Parties</h3>
-                            <div class="price align-self-start">$99</div>
-                            <p class="description">
-                                Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.
-                            </p>
-                        </div><!-- End Event item -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide event-item d-flex flex-column justify-content-end text-white p-4 rounded shadow-lg"
+                                style="background: url('../assets/img/events-1.jpg') center/cover no-repeat;">
+                                <h3 class="mb-2">Custom Parties</h3>
+                                <p class="description">Celebrate your unique moments with personalized setups and mouth-watering dishes, tailored to your needs.</p>
+                            </div>
 
-                        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(../assets/img/events-2.jpg)">
-                            <h3>Private Parties</h3>
-                            <div class="price align-self-start">$289</div>
-                            <p class="description">
-                                In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus. Facere nemo vero est ut dolores ea assumenda et. Delectus saepe accusamus aspernatur.
-                            </p>
-                        </div><!-- End Event item -->
+                            <div class="swiper-slide event-item d-flex flex-column justify-content-end text-white p-4 rounded shadow-lg"
+                                style="background: url('../assets/img/events-2.jpg') center/cover no-repeat;">
+                                <h3 class="mb-2">Private Gatherings</h3>
+                                <p class="description">Enjoy an intimate atmosphere perfect for family dinners, corporate meetings, or friendly reunions.</p>
+                            </div>
 
-                        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(../assets/img/events-3.jpg)">
-                            <h3>Birthday Parties</h3>
-                            <div class="price align-self-start">$499</div>
-                            <p class="description">
-                                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-                            </p>
-                        </div><!-- End Event item -->
+                            <div class="swiper-slide event-item d-flex flex-column justify-content-end text-white p-4 rounded shadow-lg"
+                                style="background: url('../assets/img/events-3.jpg') center/cover no-repeat;">
+                                <h3 class="mb-2">Birthday Celebrations</h3>
+                                <p class="description">Make birthdays special with delightful decor, delicious food, and cheerful vibes at our restaurant.</p>
+                            </div>
 
-                        <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(../assets/img/events-4.jpg)">
-                            <h3>Wedding Parties</h3>
-                            <div class="price align-self-start">$899</div>
-                            <p class="description">
-                                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-                            </p>
-                        </div><!-- End Event item -->
+                            <div class="swiper-slide event-item d-flex flex-column justify-content-end text-white p-4 rounded shadow-lg"
+                                style="background: url('../assets/img/events-4.jpg') center/cover no-repeat;">
+                                <h3 class="mb-2">Wedding Moments</h3>
+                                <p class="description">Host pre-wedding dinners or wedding receptions in an elegant setting with flavors to remember.</p>
+                            </div>
+                        </div>
 
+                        <!-- Pagination -->
+                        <div class="swiper-pagination mt-4"></div>
                     </div>
-                    <div class="swiper-pagination"></div>
+
+                    <!-- Navigation Buttons -->
+                    <button type="button" class="custom-swiper-prev btn btn-light shadow-sm d-flex align-items-center justify-content-center 
+          position-absolute top-50 start-0 translate-middle-y ms-2 z-3 rounded-circle"
+                        style="width: 45px; height: 45px;">
+                        <i class="bi bi-chevron-left fs-5"></i>
+                    </button>
+
+                    <button type="button" class="custom-swiper-next btn btn-light shadow-sm d-flex align-items-center justify-content-center 
+          position-absolute top-50 end-0 translate-middle-y me-2 z-3 rounded-circle"
+                        style="width: 45px; height: 45px;">
+                        <i class="bi bi-chevron-right fs-5"></i>
+                    </button>
+
                 </div>
-
             </div>
-
-        </section><!-- /Events Section -->
+        </section>><!-- /Events Section -->
 
         <!-- Chefs Section -->
         <section id="chefs" class="chefs section">
@@ -580,8 +599,11 @@ shuffle($feedbacks);
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
+    <script src="./assets/js/cursoranimation.js"></script>
+    <!-- Add this inside <body> -->
+    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
 
 
 
@@ -598,13 +620,16 @@ shuffle($feedbacks);
     <!-- Main JS File -->
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/fromvalidaiton.js"></script>
+    <script src="../assets/js/cursoranimation.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert CDN -->
     <?php if (isset($_SESSION['msg'])): ?>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             Swal.fire({
-                icon: '<?= $_SESSION['msg']['type'] ?>',
-                title: '<?= $_SESSION['msg']['type'] === 'success' ? 'Success' : 'Oops...' ?>',
-                text: '<?= $_SESSION['msg']['text'] ?>'
+                icon: '<?= $_SESSION['msg']['type'] ?>', // 'success', 'error', etc.
+                title: '<?= $_SESSION['msg']['text'] ?>',
+                showConfirmButton: false,
+                timer: 2500
             });
         </script>
         <?php unset($_SESSION['msg']); ?>
@@ -624,24 +649,26 @@ shuffle($feedbacks);
 
 
     <script>
-        const scrollWrapper = document.querySelector('.testimonial-scroll-wrapper');
-        let scrollSpeed = 0.5; // Adjust for faster or slower scroll
+        window.addEventListener('load', () => {
+            const scrollContainer = document.querySelector('.testimonial-scroll-wrapper');
 
-        function autoScroll() {
-            if (!scrollWrapper) return;
+            let scrollSpeed = 2; // 🚀 Increase this number to scroll faster (e.g., 2 = fast, 5 = very fast)
 
-            scrollWrapper.scrollLeft += scrollSpeed;
+            function autoScroll() {
+                if (!scrollContainer) return;
 
-            // Reset scroll position for infinite effect
-            if (scrollWrapper.scrollLeft >= scrollWrapper.scrollWidth / 2) {
-                scrollWrapper.scrollLeft = 0;
+                scrollContainer.scrollLeft += scrollSpeed;
+
+                // Reset scroll when halfway through (since content is duplicated)
+                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+                    scrollContainer.scrollLeft = 0;
+                }
+
+                requestAnimationFrame(autoScroll);
             }
 
-            requestAnimationFrame(autoScroll);
-        }
-
-        // Start scroll after DOM is ready
-        document.addEventListener('DOMContentLoaded', autoScroll);
+            autoScroll();
+        });
     </script>
 
 

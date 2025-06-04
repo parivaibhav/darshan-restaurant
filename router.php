@@ -30,6 +30,8 @@ switch ($request_uri) {
     case 'menu':
     case 'contactus':
     case 'login':
+    case 'register':
+
         require __DIR__ . "/$request_uri.php";
         break;
 
@@ -47,7 +49,7 @@ switch ($request_uri) {
     // Admin routes (auth required)
     case 'admin/index':
     case 'admin/menu':
-    case 'admin/orders':
+    case 'admin/myorder':
     case 'admin/users':
         authCheck();
         require __DIR__ . "/admin/" . basename($request_uri) . ".php";

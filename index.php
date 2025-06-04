@@ -122,56 +122,14 @@ shuffle($feedbacks);
 
 
     <script src="assets/js/modetoggle.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 
 </head>
 
 <body class="index-page dark-background">
 
-    <!-- <header id="header" class="header d-flex align-items-center sticky-top">
-        <div class="container position-relative d-flex align-items-center justify-content-between">
-
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-           Uncomment the line below if you also wish to use an image logo 
-                <img src="assets/img/logo.png" alt=""> 
-                <h1 class="sitename">Yummy</h1>
-                <span>.</span>
-            </a>
-
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="#hero" class="active">Home<br></a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#chefs">Chefs</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
-
-            <a class="btn-getstarted" href="index.html#book-a-table">Book a Table</a>
-
-        </div>
-    </header> -->
 
     <?php include 'header.php'; ?>
     <main class="main">
@@ -547,12 +505,13 @@ shuffle($feedbacks);
             <div class="container py-5">
                 <div class="row g-0 shadow rounded-4 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
                     <!-- Image Section -->
-                    <div class="col-lg-4 d-none d-lg-block bg-cover" style="background-image: url('assets/img/reservation.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="col-lg-4 d-none d-lg-block bg-cover" style="background-image: url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;"></div>
+
 
                     <!-- Form Section -->
                     <div class="col-lg-8 bg-white p-5">
                         <h2 class="text-center mb-4 fw-bold text-primary">Book a Table</h2>
-                        <form action="./includes/booking_table.php" method="post" class="php-email-form needs-validation" novalidate>
+                        <form action="./includes/booking_table.php" method="post" class=" needs-validation" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <input type="text" name="name" class="form-control form-control-lg" placeholder="Your Name" required>
@@ -587,7 +546,7 @@ shuffle($feedbacks);
                             </div>
 
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm">Book Now</button>
+                                <button class="btn btn-primary btn-lg px-5 shadow-sm">Book Now</button>
                             </div>
                         </form>
                     </div>
@@ -612,13 +571,13 @@ shuffle($feedbacks);
 
                     <!-- Navigation Buttons -->
                     <button type="button" class="custom-swiper-prev btn btn-light shadow-sm d-flex align-items-center justify-content-center
-        position-absolute top-50 start-0 translate-middle-y ms-2 z-3 rounded-circle"
+                     position-absolute top-50 start-0 translate-middle-y ms-2 z-3 rounded-circle"
                         style="width: 40px; height: 40px;">
                         <i class="bi bi-chevron-left fs-5"></i>
                     </button>
 
                     <button type="button" class="custom-swiper-next btn btn-light shadow-sm d-flex align-items-center justify-content-center
-        position-absolute top-50 end-0 translate-middle-y me-2 z-3 rounded-circle"
+                    position-absolute top-50 end-0 translate-middle-y me-2 z-3 rounded-circle"
                         style="width: 40px; height: 40px;">
                         <i class="bi bi-chevron-right fs-5"></i>
                     </button>
@@ -697,6 +656,7 @@ shuffle($feedbacks);
 
 
 
+
     <!-- Preloader -->
     <div id="preloader"></div>
 
@@ -743,12 +703,12 @@ shuffle($feedbacks);
 
 
     <?php if (isset($_SESSION['msg'])): ?>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             Swal.fire({
-                icon: '<?= $_SESSION['msg']['type'] ?>',
-                title: '<?= $_SESSION['msg']['type'] === 'success' ? 'Success' : 'Oops...' ?>',
-                text: '<?= $_SESSION['msg']['text'] ?>'
+                icon: '<?= $_SESSION['msg']['type'] ?>', // 'success', 'error', etc.
+                title: '<?= $_SESSION['msg']['text'] ?>',
+                showConfirmButton: false,
+                timer: 2500
             });
         </script>
         <?php unset($_SESSION['msg']); ?>
@@ -772,11 +732,17 @@ shuffle($feedbacks);
         // Set min attribute to today
         document.getElementById('datePicker').setAttribute('min', today);
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 
 
     <script src="./assets/js/gsapanimation.js"></script>
+
+
+    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
+    <script src="./assets/js/cursoranimation.js"></script>
+
 </body>
 
 </html>

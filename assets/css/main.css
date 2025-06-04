@@ -75,6 +75,7 @@ body {
   color: var(--default-color);
   background-color: #fff5f5 !important;
   font-family: var(--default-font);
+  cursor: none !important;
 
 }
 
@@ -443,7 +444,7 @@ h6 {
     font-size: 28px;
     line-height: 1;
     margin-right: 10px;
-    cursor: pointer;
+
     transition: color 0.3s ease;
   }
 
@@ -1101,7 +1102,6 @@ section,
   padding: 10px 5px;
   transition: 0.3s;
   border-radius: 0;
-  cursor: pointer;
   height: 100%;
   border: 0;
   border-bottom: 2px solid color-mix(in srgb, var(--default-color), transparent 80%);
@@ -1608,7 +1608,7 @@ section,
 .rating label {
   font-size: 2.2rem !important;
   color: #ddd;
-  cursor: pointer;
+
   transition: color 0.2s;
 }
 
@@ -1634,7 +1634,7 @@ section,
   border-radius: 6px;
   box-shadow: 0 0 0 #ff0000;
   transition: all 0.3s ease-in-out;
-  cursor: pointer;
+
 }
 
 .star-1 {
@@ -1783,7 +1783,25 @@ section,
   justify-content: center !important;
 }
 
-.sitename{
+.sitename {
   font-family: "font3" !important;
-  
+
+}
+
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+  font-size: 24px;
+  /* Size of the food icon */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+
+.no-cursor {
+  cursor: none;
+  pointer-events: none;
 }

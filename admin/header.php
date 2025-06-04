@@ -1,18 +1,16 @@
-
-
 <header id="header" class="header d-flex align-items-center sticky-top bg-white " id="main-navbar">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
         <a href="index.php" class="logo d-flex align-items-center me-auto me-xl-0">
-            <h1 class="sitename">Darshan Restaurant</h1>
+            <h1 class="sitename text-danger">Darshan Restaurant</h1>
         </a>
 
         <nav id="navmenu" class="navmenu mx-auto">
             <ul>
                 <li><a href="/college/admin/index">Home</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="users.php">Users</a></li>
-                <li><a href="myorder.php">Orders</a></li>
+                <li><a href="/college/admin/menu">Menu</a></li>
+                <li><a href="/college/admin/users">Users</a></li>
+                <li><a href="/college/admin/myorder">Orders</a></li>
             </ul>
         </nav>
 
@@ -22,3 +20,7 @@
         <a class="btn btn-danger btn-sm" href="../includes/logout.php">Logout</a>
     </div>
 </header>
+
+
+
+

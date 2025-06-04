@@ -1,6 +1,6 @@
 <?php
-include "../includes/auth_check.php";
-include_once "../includes/db.php";
+
+include __DIR__ . '/../includes/db.php';
 
 
 
@@ -53,7 +53,7 @@ $result = $conn->query($sql);
         <div class="container">
             <h2 class="mb-4 text-center">User List</h2>
 
-       
+
 
             <?php if ($result && $result->num_rows > 0): ?>
                 <div class="table-responsive">
@@ -133,6 +133,10 @@ $result = $conn->query($sql);
             return false;
         }
     </script>
+    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
+    <script src="../assets/js/cursoranimation.js"></script>
 </body>
 
 </html>

@@ -1,9 +1,3 @@
-<?php
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,6 +91,7 @@
             }
         }
     </style>
+
 </head>
 
 <body class="index-page">
@@ -199,6 +194,8 @@
         <i class="bi bi-arrow-up-short fs-3"></i>
     </a>
 
+
+
     <!-- JS -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/vendor/php-email-form/validate.js"></script>
@@ -212,6 +209,7 @@
 
 
     <script src="../assets/js/formvalidation.js"></script>
+
     <!-- Delete Logic -->
     <script>
         function confirmDelete(id, imgPath) {
@@ -222,6 +220,7 @@
             modal.show();
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php if (isset($_SESSION['msg'])): ?>
         <script>
             Swal.fire({
@@ -233,6 +232,10 @@
         </script>
         <?php unset($_SESSION['msg']); ?>
     <?php endif; ?>
+    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
+    <script src="../assets/js/cursoranimation.js"></script>
 </body>
 
 </html>

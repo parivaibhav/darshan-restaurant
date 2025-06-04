@@ -170,6 +170,11 @@
     <!-- Preloader -->
     <div id="preloader"></div>
 
+    <!-- Add this inside <body> -->
+    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+        </svg></div>
+
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/vendor/php-email-form/validate.js"></script>
@@ -182,7 +187,7 @@
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/formvalidation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert CDN -->
-
+    <script src="../assets/js/cursoranimation.js"></script>
     <?php if (isset($_SESSION['alert'])): ?>
         <script>
             Swal.fire({

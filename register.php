@@ -36,21 +36,34 @@
 
 <body>
     <?php include 'header.php'; ?>
-    <div class="container border border-3  border-light-subtle my-3 rounded-3" style="padding: 90px;">
-        <form action="./includes/register.php" method="post" class="needs-validation" novalidate>
-            <h1 class="text-center py-2 ">Register Your Account</h1>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control py-3" id="exampleFormControlInput1" placeholder="name@example.com" required>
-                <div class="invalid-feedback">Please Enter valid Email Address</div>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Register Your Account</h2>
+                        <form action="./includes/register.php" method="post" class="needs-validation" novalidate>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="name@example.com" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Password" required>
+                                <div class="invalid-feedback">Please enter a valid password.</div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-danger btn-lg">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="inputPassword2" class="mb-2">Password</label>
-                <input type="password" class="form-control py-3" id="inputPassword2" placeholder="Password" name="password" required>
-                <div class="invalid-feedback">Please Enter valid password</div>
-            </div>
-            <button class="btn btn-danger w-100 py-3">Register</button>
-        </form>
+        </div>
     </div>
     <?php include 'footer.php'; ?>
 </body>
@@ -86,7 +99,10 @@
     </script>
     <?php unset($_SESSION['msg']); ?>
 <?php endif; ?>
-
+<div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+        <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
+    </svg></div>
+<script src="./assets/js/cursoranimation.js"></script>
 
 </body>
 

@@ -3,7 +3,7 @@
 <header id="header" class="header d-flex align-items-center sticky-top bg-body-tertiary" id="main-navbar">
     <div class="container position-relative d-flex align-items-center justify-content-between px-5">
         <a href="/college/" class="logo d-flex align-items-center me-auto me-xl-0">
-            <h1 class="sitename d-none d-lg-block">Darshan Restaurant</h1>
+            <h1 class="sitename d-none d-lg-block text-danger">Darshan Restaurant</h1>
         </a>
         <nav id="navmenu" class="navmenu mx-auto">
             <ul>
