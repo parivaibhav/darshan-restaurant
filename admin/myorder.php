@@ -2,11 +2,26 @@
 
 include __DIR__ . '/../includes/db.php';
 
-// Handle success/error messages from session (for SweetAlert)
+// Time filter logic
+$filter = $_GET['filter'] ?? '';
+$whereClause = '';
 
+switch ($filter) {
+    case 'today':
+        $whereClause = "WHERE DATE(created_at) = CURDATE()";
+        break;
+    case 'last_week':
+        $whereClause = "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+        break;
+    case 'last_month':
+        $whereClause = "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+        break;
+    case 'last_year':
+        $whereClause = "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+        break;
+}
 
-// Fetch orders
-$sql = "SELECT order_id, email, menu_name, quantity, mobile, address, status FROM orders ORDER BY order_id DESC";
+$sql = "SELECT order_id, email, menu_name, quantity, mobile, address, status FROM orders $whereClause ORDER BY order_id DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -16,40 +31,48 @@ $result = $conn->query($sql);
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Project</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <title>Orders Management</title>
 
-    <!-- Favicons -->
     <link href="../assets/img/logo.png" rel="icon" />
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 
-    <!-- Vendor CSS Files -->
+    <!-- Vendor CSS -->
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
     <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
     <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
     <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
-    <!-- Main CSS File -->
+    <!-- Main CSS -->
     <link href="../assets/css/main.css" rel="stylesheet" />
     <script src="../assets/js/modetoggle.js" defer></script>
 </head>
 
 <body>
     <?php include 'header.php'; ?>
+
     <div class="container py-4">
         <h2 class="mb-4 text-center">Order Management</h2>
 
+        <!-- Filter Dropdown -->
+        <div class="row mb-3">
+            <div class="col-md-4 offset-md-8">
+                <form method="GET" class="d-flex align-items-center justify-content-end">
+                    <label for="filter" class="me-2 fw-semibold flex-wrap">Filter by:</label>
+                    <select name="filter" id="filter" class="form-select form-select-sm shadow-sm border-primary" onchange="this.form.submit()">
+                        <option value="">All Orders</option>
+                        <option value="today" <?= ($filter === 'today') ? 'selected' : '' ?>>Today</option>
+                        <option value="last_week" <?= ($filter === 'last_week') ? 'selected' : '' ?>>Last Week</option>
+                        <option value="last_month" <?= ($filter === 'last_month') ? 'selected' : '' ?>>Last Month</option>
+                        <option value="last_year" <?= ($filter === 'last_year') ? 'selected' : '' ?>>Last Year</option>
+                    </select>
+                </form>
+            </div>
+        </div>
 
-
+        <!-- Orders Table -->
         <div class="table-responsive">
             <table class="table table-bordered align-middle text-center">
                 <thead class="table-light">
@@ -106,6 +129,8 @@ $result = $conn->query($sql);
     </div>
 
     <?php include 'footer.php'; ?>
+
+    <!-- SweetAlert and JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function confirmDelete(event, form) {
@@ -124,13 +149,20 @@ $result = $conn->query($sql);
                     form.submit();
                 }
             });
-            return false;
         }
     </script>
-      <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
-    <script src="../assets/js/cursoranimation.js"></script>
+
+    <?php if (isset($_SESSION['msg'])): ?>
+        <script>
+            Swal.fire({
+                icon: '<?= $_SESSION['msg']['type'] ?>',
+                title: '<?= $_SESSION['msg']['text'] ?>',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        </script>
+        <?php unset($_SESSION['msg']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

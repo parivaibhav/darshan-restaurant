@@ -35,5 +35,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 }
 
-header("Location: ../admin/users.php"); // Adjust the path as needed
+header("Location: /college/admin/users"); // Adjust the path as needed
 exit;

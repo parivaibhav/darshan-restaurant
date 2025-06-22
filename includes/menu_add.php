@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'type' => 'error',
             'text' => 'All fields are required and price must be greater than zero.'
         ];
-        header("Location: ../admin/menu.php");
+        header("Location: /college/admin/menu");
         exit;
     }
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'type' => 'error',
                 'text' => 'Invalid image format. Allowed: JPG, JPEG, PNG, WEBP.'
             ];
-            header("Location: ../admin/menu.php");
+            header("Location: /college/admin/menu");
             exit;
         }
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'type' => 'error',
                 'text' => 'Failed to upload image.'
             ];
-            header("Location: ../admin/menu.php");
+            header("Location: /college/admin/menu");
             exit;
         }
     } else {
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'type' => 'error',
             'text' => 'Image upload failed or no image selected.'
         ];
-        header("Location: ../admin/menu.php");
+        header("Location: /college/admin/menu");
         exit;
     }
 
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
-    header("Location: ../admin/menu.php");
+    header("Location: /college/admin/menu");
     exit;
 } else {
     header("HTTP/1.1 405 Method Not Allowed");

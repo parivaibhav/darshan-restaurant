@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Basic validation
     if ($menu_id <= 0 || empty($menu_name) || $quantity <= 0 || $price <= 0 || $total_price <= 0 || !preg_match('/^[0-9]{10}$/', $mobile) || empty($address) || empty($email)) {
         $_SESSION['order_status'] = ['status' => 'error', 'message' => 'Invalid form data. Please fill in all fields correctly.'];
-        header('Location: ../client/menu.php');
+        header('Location: /college/users/menu');
         exit;
     }
 
@@ -33,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 
-    header('Location: ../client/menu.php');
+    header('Location: /college/users/menu');
     exit;
 } else {
     // Invalid access
-    header('Location: ../client/menu.php');
+    header('Location: /college/users/menu');
     exit;
 }

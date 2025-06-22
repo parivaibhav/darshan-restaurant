@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             'type' => 'error',
                             'text' => 'Failed to delete image file: ' . htmlspecialchars($imageFileName)
                         ];
-                        header("Location: ../admin/menu.php");
+                        header("Location: /college/admin/menu");
                         exit;
                     }
                 }
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'type' => 'success',
                     'text' => 'Menu item deleted successfully.'
                 ];
-                header("Location: ../admin/menu.php");
+                header("Location: /college/admin/menu");
                 exit;
             } else {
                 error_log("Delete Error: " . $deleteStmt->error);
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'type' => 'error',
                     'text' => 'Failed to delete menu item from database.'
                 ];
-                header("Location: ../admin/menu.php");
+                header("Location: /college/admin/menu");
                 exit;
             }
         } else {
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'type' => 'error',
                 'text' => 'Menu item not found.'
             ];
-            header("Location: ../admin/menu.php");
+            header("Location: /college/admin/menu");
             exit;
         }
     } else {
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'type' => 'error',
             'text' => 'Invalid menu ID.'
         ];
-        header("Location: ../admin/menu.php");
+        header("Location: /college/admin/menu");
         exit;
     }
 } else {

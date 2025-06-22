@@ -1,15 +1,22 @@
 <?php
 
 
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+
+
 include_once "includes/db.php";
 
 if (isset($_SESSION['email']) && isset($_SESSION['user_type'])) {
     // Redirect if already logged in
     if ($_SESSION['user_type'] === 'admin') {
-        header("Location: /college/admin/index");
+        header("Location: /admin/index");
         exit();
     } else {
-        header("Location: /college/users/index");
+        header("Location: /users/index");
         exit();
     }
 }
@@ -51,6 +58,9 @@ shuffle($feedbacks);
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Locomotive Scroll CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -118,6 +128,21 @@ shuffle($feedbacks);
                 transform: translateX(-50%);
             }
         }
+
+        .heading-left,
+        .heading-right {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.3s ease;
+        }
+
+        .heading-left {
+            transform: translateX(-120px) translateY(40px);
+        }
+
+        .heading-right {
+            transform: translateX(120px) translateY(40px);
+        }
     </style>
 
 
@@ -128,40 +153,51 @@ shuffle($feedbacks);
 
 </head>
 
-<body class="index-page dark-background">
+<body class="index-page dark-background" style="cursor: default !important;">
 
 
     <?php include 'header.php'; ?>
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section light-background">
+        <section id="hero" class="hero section position-relative p-0 m-0" style="height: 100vh; min-height: 500px; overflow: hidden;">
+            <!-- Fullscreen Video Background -->
+            <video
+                src="./assets/hero.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="position-absolute top-0 start-0 w-100 h-100"
+                style="object-fit: cover; z-index: 1;">
+            </video>
 
-            <div class="container">
-                <div class="row gy-4 justify-content-center justify-content-lg-between">
-                    <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                        <h1 id="animated-heading">
-                            <span class="line">Enjoy Your Healthy</span>
-                            <span class="line">Delicious Food</span>
+            <!-- Overlay for better text visibility (optional) -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.35); z-index: 2;"></div>
+
+            <!-- Absolute Centered Text Content -->
+            <div class="container h-100 position-relative" style="z-index: 3;">
+                <div class="row h-100 align-items-center justify-content-center">
+                    <div class="col-lg-8 mx-auto text-center text-white position-absolute top-50 start-50 translate-middle" style="z-index: 4;">
+                        <h1 id="animated-heading" class="display-3 fw-bold mb-3">
+                            <span class="d-block text-white heading-left">Enjoy Your Healthy</span>
+                            <span class="d-block text-white heading-right">Delicious Food</span>
                         </h1>
-
-                        <!---->
-                        <p id="animated-text">
+                        <p id="animated-text" class="lead mb-4 text-white">
                             Savor authentic flavors at Darshan Restaurant, where every dish is crafted with fresh ingredients, bold spices, and timeless recipes.
                         </p>
-                        <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                            <a href="#book-a-table" class="btn-get-started">Booka a Table</a>
-                            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                            <a href="#book-a-table" class="btn-get-started">Book a Table</a>
+                            <a href="https://youtu.be/mqfTD3DzbwY?si=g2ItlnvzsRz9Vl6A" class="glightbox btn-watch-video d-flex align-items-center justify-content-center">
+                                <i class="bi bi-play-circle fs-4"></i>
+                                <span class="ms-2 ">Watch Video</span>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                        <img src="./assets/img/hero-img.png" class="img-fluid animated rounded" alt="">
-                    </div>
-
                 </div>
             </div>
-
-        </section><!-- /Hero Section -->
+        </section>
 
 
 
@@ -715,16 +751,7 @@ shuffle($feedbacks);
     <?php endif; ?>
 
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const toggle = document.querySelector(".mobile-nav-toggle");
-            const body = document.body;
 
-            toggle.addEventListener("click", function() {
-                body.classList.toggle("mobile-nav-active");
-            });
-        });
-    </script>
     <script>
         // Get today's date in YYYY-MM-DD format
         const today = new Date().toISOString().split('T')[0];
@@ -737,11 +764,10 @@ shuffle($feedbacks);
 
     <script src="./assets/js/gsapanimation.js"></script>
 
+    <!-- Locomotive Scroll JS -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
 
-    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
-    <script src="./assets/js/cursoranimation.js"></script>
+
 
 </body>
 

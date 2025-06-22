@@ -84,7 +84,7 @@ shuffle($feedbacks);
 <body class="index-page">
 
     <?php include 'header.php'; ?>
-    <main class="main">
+    <main class="main" >
 
         <!-- Hero Section -->
         <section id="hero" class="hero section light-background">
@@ -92,7 +92,7 @@ shuffle($feedbacks);
             <div class="container">
                 <div class="row gy-4 justify-content-center justify-content-lg-between">
                     <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                        <h1 id="animated-heading">
+                        <h1 id="animated-heading" >
                             <span class="line">Enjoy Your Healthy</span>
                             <span class="line">Delicious Food</span>
                         </h1>
@@ -456,7 +456,7 @@ shuffle($feedbacks);
                     <!-- Form Section -->
                     <div class="col-lg-8 bg-white p-5">
                         <h2 class="text-center mb-4 fw-bold text-primary">Book a Table</h2>
-                        <form action="../includes/booking_table.php" method="post" class="php-email-form needs-validation" novalidate>
+                        <form action="../includes/booking_table.php" method="post" class="needs-validation" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <input type="text" name="name" class="form-control form-control-lg" placeholder="Your Name" required>
@@ -610,7 +610,7 @@ shuffle($feedbacks);
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
+
     <script src="../assets/vendor/aos/aos.js"></script>
     <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -670,6 +670,8 @@ shuffle($feedbacks);
             autoScroll();
         });
     </script>
+
+  
 
 
 </body>

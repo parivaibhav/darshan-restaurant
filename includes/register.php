@@ -10,13 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Basic validation (optional, add more as needed)
     if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
         $_SESSION['message'] = ['type' => 'error', 'text' => 'Invalid email format.'];
-        header('Location: ../register.php');
+        header('Location: /college/register');
         exit();
     }
 
     if (strlen($password_plain) < 6) {
         $_SESSION['message'] = ['type' => 'error', 'text' => 'Password must be at least 6 characters.'];
-        header('Location: ../register.php');
+        header('Location: /college/register');
         exit();
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $_SESSION['message'] = ['type' => 'error', 'text' => 'Email already registered.'];
-        header('Location: ../register.php');
+        header('Location: /college/register');
         exit();
     }
 
@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         $_SESSION['msg'] = ['type' => 'success', 'text' => 'Registration successful!'];
         $_SESSION['email'] = $email; // Set session email for logged-in user
-        header('Location: ../client/index.php'); // Redirect to client homepage or dashboard
+        header('Location: /college/users/index'); // Redirect to client homepage or dashboard
         exit();
     } else {
         $_SESSION['msg'] = ['type' => 'error', 'text' => 'Registration failed, please try again.'];
-        header('Location: ../register.php');
+        header('Location: /college/register');
         exit();
     }
 
@@ -55,6 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 } else {
     // If not POST request, redirect to register page
-    header('Location: ../register.php');
+    header('Location: /college/register');
     exit();
 }

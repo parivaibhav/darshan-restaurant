@@ -198,7 +198,7 @@
 
     <!-- JS -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    
     <script src="../assets/vendor/aos/aos.js"></script>
     <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -221,21 +221,18 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <?php if (isset($_SESSION['msg'])): ?>
-        <script>
-            Swal.fire({
-                icon: '<?= $_SESSION['msg']['type'] ?>', // 'success', 'error', etc.
-                title: '<?= $_SESSION['msg']['text'] ?>',
-                showConfirmButton: false,
-                timer: 2500
-            });
-        </script>
-        <?php unset($_SESSION['msg']); ?>
-    <?php endif; ?>
-    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
-    <script src="../assets/js/cursoranimation.js"></script>
+   
+   <?php if (isset($_SESSION['msg'])): ?>
+    <script>
+        Swal.fire({
+            icon: '<?= $_SESSION['msg']['type'] ?>', // 'success', 'error', etc.
+            title: '<?= $_SESSION['msg']['text'] ?>',
+            showConfirmButton: false,
+            timer: 2500
+        });
+    </script>
+    <?php unset($_SESSION['msg']); ?>
+<?php endif; ?>
 </body>
 
 </html>

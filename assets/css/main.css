@@ -35,7 +35,7 @@
   /* --background-color: #ffffff; Background color for the entire website, including individual sections */
   --default-color: #000000;
   /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #616161;
+  --heading-color: #262626;
   /* Color for headings, subheadings and title throughout the website */
   --accent-color: #ce1212;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
@@ -75,7 +75,7 @@ body {
   color: var(--default-color);
   background-color: #fff5f5 !important;
   font-family: var(--default-font);
-  cursor: none !important;
+  cursor: default !important;
 
 }
 
@@ -180,57 +180,7 @@ h6 {
   }
 }
 
-/* PHP Email Form Messages
-------------------------------*/
-.php-email-form .error-message {
-  display: none;
-  background: #df1529;
-  color: #ffffff;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
 
-.php-email-form .sent-message {
-  display: none;
-  color: #ffffff;
-  background: #059652;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.php-email-form .loading {
-  display: none;
-  background: var(--surface-color);
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid var(--accent-color);
-  border-top-color: var(--surface-color);
-  animation: php-email-form-loading 1s linear infinite;
-}
-
-@keyframes php-email-form-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /*--------------------------------------------------------------
 # Global Header
@@ -667,7 +617,7 @@ h6 {
   position: fixed;
   visibility: hidden;
   opacity: 0;
-  right: 85px;
+  right: 15px;
   bottom: -95px;
   z-index: 99999;
   background-color: var(--accent-color);
@@ -752,6 +702,8 @@ section,
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 60px 0;
+  align-items: center;
+  justify-content: center;
   scroll-margin-top: 92px;
   overflow: clip;
 }
@@ -1786,22 +1738,4 @@ section,
 .sitename {
   font-family: "font3" !important;
 
-}
-
-
-#custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999999;
-  font-size: 24px;
-  /* Size of the food icon */
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease-out;
-}
-
-.no-cursor {
-  cursor: none;
-  pointer-events: none;
 }

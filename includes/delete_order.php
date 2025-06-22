@@ -20,5 +20,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['msg'] = ['type' => 'error', 'text' => 'Invalid request method.'];
 }
 
-header("Location: ../admin/myorder.php"); // adjust path as needed
+header("Location: /college/admin/myorder"); // adjust path as needed
 exit;

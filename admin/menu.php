@@ -23,13 +23,13 @@ if ($catResult && $catResult->num_rows > 0) {
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Project</title>
+    <title>Menu Management </title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
     <!-- Favicons -->
     <link href="../assets/img/logo.png" rel="icon" />
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -47,7 +47,7 @@ if ($catResult && $catResult->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Main CSS File -->
     <link href="../assets/css/main.css" rel="stylesheet" />
-    <script src="../assets/js/modetoggle.js" defer></script>
+   
 </head>
 
 <body>
@@ -57,7 +57,7 @@ if ($catResult && $catResult->num_rows > 0) {
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Our Menu</h2>
-            <p><span>Check Our</span> <span class="description-title">Yummy Menu</span></p>
+            <p><span>Check Our</span> <span class="description-title">Darshan Menu</span></p>
         </div>
         <!-- End Section Title -->
 
@@ -354,10 +354,7 @@ if ($catResult && $catResult->num_rows > 0) {
         </script>
         <?php unset($_SESSION['msg']); ?>
     <?php endif; ?>
-    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
-    <script src="../assets/js/cursoranimation.js"></script>
+   
 </body>
 
 </html>

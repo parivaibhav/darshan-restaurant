@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
     if (!$stmt) {
         $_SESSION['msg'] = ['type' => 'error', 'text' => 'Database error: ' . $conn->error];
-        header("Location: ../login");
+        header("Location: /college/login");
         exit;
     }
 
@@ -30,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_type'] = $user['user_type'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['login_time'] = time();
+
+            // Set cookies for a more persistent login (1 day validity)
+            setcookie('email', $user['email'], time() + 86400, '/', '', false, true);  // HttpOnly & Secure
+            setcookie('user_type', $user['user_type'], time() + 86400, '/', '', false, true);  // HttpOnly & Secure
+            setcookie('login_time', time(), time() + 86400, '/', '', false, true);  // HttpOnly & Secure
 
             $_SESSION['msg'] = ['type' => 'success', 'text' => 'Login successful!'];
 

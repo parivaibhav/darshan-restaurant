@@ -49,5 +49,5 @@ if (isset($_POST['id'], $_POST['imgpath'])) {
     ];
 }
 
-header("Location: ../admin/index.php");
+header("Location: /college/admin/index");
 exit();

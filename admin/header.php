@@ -1,3 +1,12 @@
+<?php
+
+
+
+?>
+
+
+
+
 <header id="header" class="header d-flex align-items-center sticky-top bg-white " id="main-navbar">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
@@ -11,6 +20,7 @@
                 <li><a href="/college/admin/menu">Menu</a></li>
                 <li><a href="/college/admin/users">Users</a></li>
                 <li><a href="/college/admin/myorder">Orders</a></li>
+                <li><a href="/college/admin/bookings">Bookings</a></li>
             </ul>
         </nav>
 
@@ -20,7 +30,3 @@
         <a class="btn btn-danger btn-sm" href="../includes/logout.php">Logout</a>
     </div>
 </header>
-
-
-
-

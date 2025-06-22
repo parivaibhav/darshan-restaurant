@@ -22,5 +22,5 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Redirect to the login page or homepage
-header("Location: ../login.php");
+header("Location: /college/login");
 exit();

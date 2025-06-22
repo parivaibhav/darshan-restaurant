@@ -14,10 +14,10 @@ $request_uri = trim($request_uri, '/');
 
 function authCheck()
 {
-    if (!isset($_SESSION['email']) || !isset($_SESSION['user_type'])) {
+    if (!isset($_COOKIE['email']) || !isset($_COOKIE['user_type'])) {
         header('Location: /college/login');
         exit();
-    }
+    } 
 }
 
 
@@ -51,6 +51,7 @@ switch ($request_uri) {
     case 'admin/menu':
     case 'admin/myorder':
     case 'admin/users':
+    case 'admin/bookings':
         authCheck();
         require __DIR__ . "/admin/" . basename($request_uri) . ".php";
         break;
