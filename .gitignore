@@ -73,5 +73,7 @@ includes/db.php
 /assets/vendor/
 /assets/vendor/**/*
 
+#Ignore Image files
+/assets/img/**/*.{png,jpg,jpeg,gif,svg,webp}
 
 **/.DS_Store
