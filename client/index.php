@@ -212,7 +212,7 @@ shuffle($feedbacks);
 
         <!-- Testimonials Section -->
 
-        <section id="testimonials" class="testimonials section container-fluid my-5">
+        <section id="testimonials" class="testimonials section container-fluid my-5 px-3">
             <div class="section-title mb-4 text-center">
                 <h2>TESTIMONIALS</h2>
                 <p>What Are They <span class="description-title">Saying About Us</span></p>
@@ -599,11 +599,8 @@ shuffle($feedbacks);
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    <script src="./assets/js/cursoranimation.js"></script>
-    <!-- Add this inside <body> -->
-    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
+   
+
 
 
 

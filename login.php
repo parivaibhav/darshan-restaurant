@@ -69,11 +69,10 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
                                 <button type="submit" class="btn btn-danger btn-lg">Login</button>
                             </div>
 
-                            <div class="text-end">
-                                <a href="/college/register" class="text-decoration-none">Don't have an account?</a>
+                            <div class="text-center">
+                                <p class="mb-0">Don't have an account? <a href="register" class="text-danger">Register here</a></p>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -90,12 +89,6 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert CDN -->
@@ -124,8 +117,8 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
         </script>
         <?php unset($_SESSION['msg']); ?>
     <?php endif; ?>
-    
 
+    <script src="assets/js/formvalidation.js"></script>>
 
 </body>
 

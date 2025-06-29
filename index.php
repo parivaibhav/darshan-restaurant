@@ -143,6 +143,88 @@ shuffle($feedbacks);
         .heading-right {
             transform: translateX(120px) translateY(40px);
         }
+
+        #testimonials>div.d-flex.overflow-hidden.px-3 {
+            overflow-x: auto;
+            /* allow horizontal scroll */
+            overflow-y: hidden;
+            /* hide vertical scroll */
+            white-space: nowrap;
+            /* keep inline cards */
+            scroll-behavior: smooth;
+            gap: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Scroll wrapper */
+        .testimonial-scroll-wrapper {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 1rem;
+        }
+
+        /* Each testimonial card fixed size */
+        .testimonial-item {
+            min-width: 300px !important;
+            max-width: 300px !important;
+            height: 260px !important;
+            flex-shrink: 0 !important;
+
+            /* Styling */
+            background-color: #f8f9fa;
+            /* light background */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image style */
+        .testimonial-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid #007bff;
+        }
+
+        /* Quote paragraph */
+        .testimonial-item p {
+            flex-grow: 1;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1rem;
+            overflow-wrap: break-word;
+        }
+
+        /* Username */
+        .testimonial-item h3 {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Stars */
+        .testimonial-item .stars {
+            color: #ffc107;
+            /* Bootstrap warning color */
+        }
+
+        .testimonial-item p {
+            flex-grow: 1;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+            /* Responsive font size */
+            overflow-wrap: break-word;
+            /* Wrap long words */
+            word-break: break-word;
+            /* Break words if needed */
+            white-space: normal;
+            /* Allow line breaks */
+            line-height: 1.4;
+        }
     </style>
 
 
@@ -215,7 +297,7 @@ shuffle($feedbacks);
                                 With a wide variety of dishes and a welcoming atmosphere, we’re your go-to spot for tasty satisfaction.
                             </p>
                             <div class="text-center">
-                                <a href="#" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
+                                <a href="aboutus" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Why Box -->
@@ -255,48 +337,6 @@ shuffle($feedbacks);
         </section><!-- /Why Us Section -->
 
         <!-- Stats Section -->
-        <section id="stats" class="stats section ">
-
-            <img src="assets/img/stats-bg.jpg" alt="" data-aos="fade-in">
-
-            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="row gy-4">
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item text-center w-100 h-100">
-                            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                            <p class="stats-p">Clients</p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item text-center w-100 h-100">
-                            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                            <p class="stats-p">Projects</p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item text-center w-100 h-100">
-                            <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-                            <p class="stats-p">Hours Of Support</p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="stats-item text-center w-100 h-100">
-                            <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-                            <p class="stats-p">Workers</p>
-                        </div>
-                    </div><!-- End Stats Item -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Stats Section -->
-
         <section id="testimonials" class="testimonials section container-fluid my-5">
             <div class="section-title mb-4 text-center">
                 <h2>TESTIMONIALS</h2>
@@ -360,6 +400,9 @@ shuffle($feedbacks);
                 </div>
             </div>
         </section>
+        <!-- /Stats Section -->
+
+     
 
         <!-- Events Section -->
         <section id="events" class="events section py-5">

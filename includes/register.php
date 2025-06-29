@@ -1,60 +1,70 @@
 <?php
 session_start();
-include('db.php');  // Your DB connection file
+require_once('db.php'); // Database connection
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = trim($_POST['email']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Sanitize & collect input
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $password_plain = $_POST['password'];
-    $user_type = "user";
+    $user_type = 'user';
 
-    // Basic validation (optional, add more as needed)
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-        $_SESSION['message'] = ['type' => 'error', 'text' => 'Invalid email format.'];
+    // === Input Validation ===
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Invalid email format.'];
         header('Location: /college/register');
-        exit();
+        exit;
     }
 
-    if (strlen($password_plain) < 6) {
-        $_SESSION['message'] = ['type' => 'error', 'text' => 'Password must be at least 6 characters.'];
+    // Password must be at least 6 characters, contain 1 symbol and 1 number
+    $hasSymbol = preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password_plain);
+    $hasNumber = preg_match('/\d/', $password_plain);
+    if (strlen($password_plain) < 6 || !$hasSymbol || !$hasNumber) {
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Password must be at least 6 characters with 1 symbol & 1 number.'];
         header('Location: /college/register');
-        exit();
+        exit;
     }
 
-    // Check if email already exists
-    $check = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $check->bind_param("s", $email);
-    $check->execute();
-    $result = $check->get_result();
+    // === Check for duplicate email ===
+    $checkStmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $checkStmt->bind_param("s", $email);
+    $checkStmt->execute();
+    $checkStmt->store_result();
 
-    if ($result->num_rows > 0) {
-        $_SESSION['message'] = ['type' => 'error', 'text' => 'Email already registered.'];
+    if ($checkStmt->num_rows > 0) {
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Email already registered.'];
         header('Location: /college/register');
-        exit();
+        exit;
     }
 
-    // Hash the password
-    $password_hashed = password_hash($password_plain, PASSWORD_DEFAULT);
+    $checkStmt->close();
 
-    // Insert new user
-    $stmt = $conn->prepare("INSERT INTO users (email, password, user_type) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $email, $password_hashed, $user_type);
+    // === Register New User ===
+    $hashedPassword = password_hash($password_plain, PASSWORD_DEFAULT);
+    $insertStmt = $conn->prepare("INSERT INTO users (email, password, user_type) VALUES (?, ?, ?)");
+    $insertStmt->bind_param("sss", $email, $hashedPassword, $user_type);
 
-    if ($stmt->execute()) {
+    if ($insertStmt->execute()) {
         $_SESSION['msg'] = ['type' => 'success', 'text' => 'Registration successful!'];
-        $_SESSION['email'] = $email; // Set session email for logged-in user
-        header('Location: /college/users/index'); // Redirect to client homepage or dashboard
-        exit();
+        $_SESSION['email'] = $email;
+        $_SESSION['user_type'] = $user['user_type'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['login_time'] = time();
+
+        // Set cookies for a more persistent login (1 day validity)
+        setcookie('email', $user['email'], time() + 86400, '/', '', false, true);  // HttpOnly & Secure
+        setcookie('user_type', $user['user_type'], time() + 86400, '/', '', false, true);  // HttpOnly & Secure
+        setcookie('login_time', time(), time() + 86400, '/', '', false, true);  // HttpOnly & Secure
+        header('Location: /college/users/index');
     } else {
-        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Registration failed, please try again.'];
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Registration failed. Please try again.'];
         header('Location: /college/register');
-        exit();
     }
 
-    $stmt->close();
-    $check->close();
+    $insertStmt->close();
     $conn->close();
+    exit;
 } else {
-    // If not POST request, redirect to register page
+    // Redirect non-POST requests
     header('Location: /college/register');
-    exit();
+    exit;
 }

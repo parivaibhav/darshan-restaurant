@@ -102,7 +102,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
                 <h1 class="h3 fw-bold mb-0">Gallery Management</h1>
                 <button class="btn btn-primary btn-upload shadow-lg" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                    <i class="bi bi-cloud-upload me-2"></i> Upload Image
+                    <i class="bi bi-upload me-2"></i> Upload Image
                 </button>
             </div>
 

@@ -1,106 +1,190 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Project</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>Darshan Restaurent | Sign up Page</title>
 
     <!-- Favicons -->
     <link href="assets/img/logo.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
+    <!-- Fonts & Bootstrap -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <!-- Main CSS File -->
+    <!-- Custom CSS -->
     <link href="assets/css/main.css" rel="stylesheet">
-
-    <script src="assets/js/modetoggle.js" defer></script>
-
 </head>
-
-
-
 
 <body>
     <?php include 'header.php'; ?>
+
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
-                <div class="card border-0 shadow-sm rounded-4">
-                    <div class="card-body p-5">
+                <div class="card border-0 shadow rounded-4 p-4">
+                    <div class="card-body p-4">
                         <h2 class="text-center mb-4">Register Your Account</h2>
-                        <form action="./includes/register.php" method="post" class="needs-validation" novalidate>
+
+                        <form action="./includes/register.php" method="post" class="needs-validation" novalidate onsubmit="return validateForm()">
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
-                                <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="name@example.com" required>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required>
                                 <div class="invalid-feedback">Please enter a valid email address.</div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Password" required>
-                                <div class="invalid-feedback">Please enter a valid password.</div>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" oninput="checkPasswordStrength()" required>
+                                    <span class="input-group-text" onclick="togglePassword('password', this)">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </span>
+                                </div>
+                                <small id="passwordStrength" class="form-text text-muted mt-1"></small>
                             </div>
 
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-danger btn-lg">Register</button>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                                    <span class="input-group-text" onclick="togglePassword('confirmPassword', this)">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </span>
+                                </div>
+                                <div class="invalid-feedback">Passwords must match.</div>
+                            </div>
+
+                            <div class="d-grid mt-3">
+                                <button type="submit" class="btn btn-danger">Register</button>
                             </div>
                         </form>
+
+                        <div class="text-center mt-3">
+                            <p>Already have an account? <a href="login" class="text-danger">Login here</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <?php include 'footer.php'; ?>
-</body>
 
+    <!-- Scripts -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- Scroll Top -->
-<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Session Message Alert -->
+    <?php if (isset($_SESSION['msg'])): ?>
+        <script>
+            Swal.fire({
+                icon: '<?= $_SESSION['msg']['type'] ?>',
+                title: '<?= $_SESSION['msg']['text'] ?>',
+                showConfirmButton: false,
+                timer: 2500
+            });
+        </script>
+        <?php unset($_SESSION['msg']); ?>
+    <?php endif; ?>
 
-<!-- Preloader -->
-<div id="preloader"></div>
-
-<!-- Vendor JS Files -->
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-<script src="assets/vendor/aos/aos.js"></script>
-<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-<!-- Main JS File -->
-<script src="assets/js/main.js"></script>
-<script src="assets/js/formvalidation.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert CDN -->
-
-<?php if (isset($_SESSION['msg'])): ?>
+    <!-- Password Validation Scripts -->
     <script>
-        Swal.fire({
-            icon: '<?= $_SESSION['msg']['type'] ?>', // 'success', 'error', etc.
-            title: '<?= $_SESSION['msg']['text'] ?>',
-            showConfirmButton: false,
-            timer: 2500
+        function togglePassword(fieldId, toggleIcon) {
+            const input = document.getElementById(fieldId);
+            const icon = toggleIcon.querySelector('i');
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            } else {
+                input.type = "password";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value.trim();
+            const strengthMsg = document.getElementById('passwordStrength');
+
+            const isLongEnough = password.length >= 3;
+            const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const hasNumber = /\d/.test(password);
+
+            if (isLongEnough && hasSymbol && hasNumber) {
+                strengthMsg.textContent = "valid password";
+                strengthMsg.classList.remove("text-danger");
+                strengthMsg.classList.add("text-primary");
+            } else {
+                strengthMsg.textContent = "Min 3 chars, 1 symbol, 1 number required.";
+                strengthMsg.classList.remove("text-primary");
+                strengthMsg.classList.add("text-danger");
+            }
+        }
+
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const pass = document.getElementById('password').value;
+            const confirmPass = this.value;
+
+            if (confirmPass && pass !== confirmPass) {
+                this.classList.add("is-invalid");
+            } else {
+                this.classList.remove("is-invalid");
+            }
         });
+
+        function validateForm() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            const strengthMsg = document.getElementById('passwordStrength');
+
+            const isLongEnough = password.length >= 3;
+            const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const hasNumber = /\d/.test(password);
+
+            if (!email) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email Required',
+                    text: 'Please enter your email address.',
+                });
+                return false;
+            }
+
+            if (!isLongEnough || !hasSymbol || !hasNumber) {
+                strengthMsg.textContent = "Min 3 chars, 1 symbol, 1 number required.";
+                strengthMsg.classList.remove("text-primary");
+                strengthMsg.classList.add("text-danger");
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Weak Password',
+                    text: 'Please use a stronger password.',
+                });
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Passwords Do Not Match',
+                    text: 'Make sure both password fields match.',
+                });
+                return false;
+            }
+
+            return true;
+        }
     </script>
-    <?php unset($_SESSION['msg']); ?>
-<?php endif; ?>
 
-
+    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

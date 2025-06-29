@@ -20,7 +20,7 @@
     <div class="d-none flex gap-3 d-lg-flex px-4">
         <a>
             <?php
-            echo htmlspecialchars($_SESSION['email']);
+            echo htmlspecialchars($_COOKIE['email']);
             ?>
         </a>
         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#logoutModal">
