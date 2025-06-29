@@ -80,5 +80,5 @@ This is a full-featured **Food Restaurant Website** built in **PHP**, including 
 
 1. 📥 **Clone the repository**  
    ```bash
-   git clone https://github.com/parivaibhav/php-project.git
-   cd php-project
+   git clone https://github.com/parivaibhav/darshan-restaurent.git
+   cd darshan-restaurent
