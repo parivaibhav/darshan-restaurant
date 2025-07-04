@@ -1,6 +1,6 @@
 <?php
 
-
+ob_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -10,16 +10,6 @@ ini_set('display_errors', 1);
 
 include_once "includes/db.php";
 
-if (isset($_SESSION['email']) && isset($_SESSION['user_type'])) {
-    // Redirect if already logged in
-    if ($_SESSION['user_type'] === 'admin') {
-        header("Location: /admin/index");
-        exit();
-    } else {
-        header("Location: /users/index");
-        exit();
-    }
-}
 
 
 try {

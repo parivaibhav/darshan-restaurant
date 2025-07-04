@@ -1,5 +1,15 @@
 <?php
+require_once __DIR__ . '/../includes/auth_check.php';
+$user = requireLogin();
+$email = $user['email'];
 
+ // redirect → /login if not logged in
+/* ---------- role gate ---------- */
+if ($user['userType'] !== 'admin') {
+    header('Location: ' . ($user['userType'] === 'user'
+        ? '/college/users/index' : '/college/login'));
+    exit();
+}
 
 
 ?>
@@ -10,7 +20,7 @@
 <header id="header" class="header d-flex align-items-center sticky-top bg-white " id="main-navbar">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
-        <a href="index.php" class="logo d-flex align-items-center me-auto me-xl-0">
+        <a href="/college/admin/index" class="logo d-flex align-items-center me-auto me-xl-0">
             <h1 class="sitename text-danger">Darshan Restaurant</h1>
         </a>
 

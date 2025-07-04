@@ -1,62 +1,56 @@
 <?php
+declare(strict_types=1);
 session_start();
-include('db.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $useremail = $_POST['useremail'] ?? '';
-    $password = $_POST['password'] ?? '';
+require_once __DIR__ . '/db.php';        // defines $conn (mysqli)
+require_once __DIR__ . '/auth_check.php'; // defines encrypt(), SECRET_KEY, routeAfterLogin()
 
-    if (!$useremail || !$password) {
-        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Email and Password are required'];
-        header("Location: /college/login");
-        exit;
-    }
-
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    if (!$stmt) {
-        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Database error: ' . $conn->error];
-        header("Location: /college/login");
-        exit;
-    }
-
-    $stmt->bind_param("s", $useremail);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['user_type'] = $user['user_type'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['login_time'] = time();
-
-            // Set cookies for a more persistent login (1 day validity)
-            setcookie('email', $user['email'], time() + 86400, '/', '', false, true);  // HttpOnly & Secure
-            setcookie('user_type', $user['user_type'], time() + 86400, '/', '', false, true);  // HttpOnly & Secure
-            setcookie('login_time', time(), time() + 86400, '/', '', false, true);  // HttpOnly & Secure
-
-            $_SESSION['msg'] = ['type' => 'success', 'text' => 'Login successful!'];
-
-            if ($user['user_type'] === 'admin') {
-                header("Location: /college/admin/index");
-            } else {
-                header("Location:/college/users/index");
-            }
-            exit;
-        } else {
-            $_SESSION['msg'] = ['type' => 'error', 'text' => 'Incorrect password'];
-        }
-    } else {
-        $_SESSION['msg'] = ['type' => 'error', 'text' => 'User not found'];
-    }
-
-    $stmt->close();
-    $conn->close();
-
-    header("Location: /college/login");
-    exit;
-} else {
-    header("Location:/college/login");
-    exit;
+/* ─── Only accept POST ─────────────────────────────────────────────────────── */
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: /college/login');
+    exit();
 }
+
+/* ─── Input validation ────────────────────────────────────────────────────── */
+$userEmail = trim($_POST['useremail'] ?? '');
+$password  = $_POST['password'] ?? '';
+
+if ($userEmail === '' || $password === '') {
+    $_SESSION['msg'] = ['type' => 'error', 'text' => 'Email and password are required'];
+    header('Location: /college/login');
+    exit();
+}
+
+/* ─── Fetch user with a prepared statement ────────────────────────────────── */
+$stmt = $conn->prepare('SELECT email, password, user_type FROM users WHERE email = ? LIMIT 1');
+if (!$stmt) {
+    $_SESSION['msg'] = ['type' => 'error', 'text' => 'Database error'];
+    header('Location: /college/login');
+    exit();
+}
+
+$stmt->bind_param('s', $userEmail);
+$stmt->execute();
+$result = $stmt->get_result();
+$user   = $result->fetch_assoc();
+$stmt->close();
+
+/* ─── Verify credentials ──────────────────────────────────────────────────── */
+if (!$user || !password_verify($password, $user['password'])) {
+    $_SESSION['msg'] = ['type' => 'error', 'text' => 'Invalid credentials'];
+    header('Location: /college/login');
+    exit();
+}
+
+/* ─── Successful login ────────────────────────────────────────────────────── */
+$now          = time();
+$cookieMaxAge = 86400; // 24 h
+
+setcookie('email',      encrypt($user['email'],     SECRET_KEY), $now + $cookieMaxAge, '/', '', false, true);
+setcookie('user_type',  encrypt($user['user_type'], SECRET_KEY), $now + $cookieMaxAge, '/', '', false, true);
+setcookie('login_time', encrypt((string) $now,      SECRET_KEY), $now + $cookieMaxAge, '/', '', false, true);
+
+$_SESSION['msg'] = ['type' => 'success', 'text' => 'Login successful!'];
+
+/* ─── Redirect based on role ──────────────────────────────────────────────── */
+routeAfterLogin($user['user_type']);

@@ -1,4 +1,6 @@
+
 <?php
+
 
 $showExpiredAlert = false;
 if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
@@ -12,7 +14,7 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Project</title>
+    <title>Darshan Restaurant | Login</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -45,34 +47,45 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
                 <div class="card shadow-sm border-0 rounded-4">
-                    <div class="card-body p-5">
+                    <div class="card-body px-5 py-4">
+                         <img src="./assets/img/logo.png" alt="logo" width="100" class="d-block mx-auto my-3" />
                         <h2 class="text-center mb-4">Login to Your Account</h2>
-
                         <form action="includes/login.php" method="post" id="loginForm" class="needs-validation" novalidate>
+
+                            <!-- Email Field -->
                             <div class="mb-3">
                                 <label for="useremail" class="form-label">Email address</label>
-                                <input type="email" class="form-control form-control-lg" id="useremail" name="useremail" placeholder="name@example.com" required>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address.
+                                <div class="input-group ">
+                                    <input type="email" class="form-control" id="useremail" name="useremail" placeholder="name@example.com" required>
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
                                 </div>
                             </div>
 
+                            <!-- Password Field -->
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
-                                <div class="invalid-feedback">
-                                    Password is required.
+                                <div class="input-group ">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <div class="invalid-feedback">Password is required.</div>
                                 </div>
                             </div>
 
+                            <!-- Submit Button -->
                             <div class="d-grid mb-3">
-                                <button type="submit" class="btn btn-danger btn-lg">Login</button>
+                                <button type="submit" class="btn btn-danger">Login</button>
                             </div>
 
+                            <!-- Register Link -->
                             <div class="text-center">
-                                <p class="mb-0">Don't have an account? <a href="register" class="text-danger">Register here</a></p>
+                                <p class="mb-0" style="font-size:clamp(0.95rem, 2vw, 1.1rem);">
+                                    Don't have an account?
+                                    <a href="register" class="text-danger" style="font-size:inherit;">Register here</a>
+                                </p>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -118,7 +131,7 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
         <?php unset($_SESSION['msg']); ?>
     <?php endif; ?>
 
-    <script src="assets/js/formvalidation.js"></script>>
+    <script src="assets/js/formvalidation.js"></script>
 
 </body>
 

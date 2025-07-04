@@ -35,7 +35,7 @@
   /* --background-color: #ffffff; Background color for the entire website, including individual sections */
   --default-color: #000000;
   /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #262626;
+  --heading-color: #000000;
   /* Color for headings, subheadings and title throughout the website */
   --accent-color: #ce1212;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
@@ -75,7 +75,7 @@ body {
   color: var(--default-color);
   background-color: #fff5f5 !important;
   font-family: var(--default-font);
-  cursor: default !important;
+  cursor:default !important;
 
 }
 
@@ -391,180 +391,180 @@ h6 {
 @media (max-width: 1199px) {
   .mobile-nav-toggle {
     color: #333;
-    font-size: 28px;
-    line-height: 1;
-    margin-right: 10px;
-
-    transition: color 0.3s ease;
+    font-size: 30px;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 10001;
+    position: relative;
   }
 
+   .navmenu ul h2{
+       margin-bottom:100px !important;
+   }
+
   .mobile-nav-toggle:hover {
-    color: #007bff;
+    color: #0d6efd;
+    transform: scale(1.1);
   }
 
   .navmenu {
-    padding: 0;
-    z-index: 9997;
+    display: none;
   }
 
-  .navmenu ul {
-    display: none;
+  .mobile-nav-active .navmenu {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .mobile-nav-active .navmenu ul {
     list-style: none;
     position: absolute;
-    top: 60px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    padding: 10px 0;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    padding: 40px 20px;
     margin: 0;
-    border-radius: 10px;
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    transition: all 0.3s ease;
-    z-index: 9998;
+    animation: slideInLeft 0.4s ease-out;
+  }
+
+  .navmenu ul li {
+    margin-bottom: 12px;
   }
 
   .navmenu a {
-    color: #333;
-    padding: 12px 24px;
-    font-size: 16px;
+    display: block;
+    padding: 12px 16px;
+    font-size: 15px;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    color: #333 !important;
     text-decoration: none;
-    border-bottom: 1px solid #f1f1f1;
-    transition: background 0.3s, color 0.3s;
+    border-radius: 6px;
+   
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   .navmenu a:hover,
   .navmenu .active {
-    background-color: #f8f9fa;
-    color: #007bff;
+    background-color: #e6f0ff;
+    color: #fc3838 !important;
   }
 
-  .navmenu a i {
-    font-size: 14px;
-    margin-left: 8px;
-    transition: transform 0.3s;
-  }
-
-  .navmenu .dropdown ul {
+  .navmenu .dropdown > ul {
     display: none;
-    background-color: #f9f9f9;
-    padding-left: 20px;
+    padding-left: 15px;
+    margin-top: 5px;
   }
 
-  .navmenu .dropdown.dropdown-active>ul {
+  .navmenu .dropdown.dropdown-active > ul {
     display: block;
-  }
-
-  .mobile-nav-active {
-    overflow: hidden;
   }
 
   .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 20px;
-    z-index: 10000;
-  }
-
-  .mobile-nav-active .navmenu {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 9999;
+    top: 20px;
+    left: 260px;
+    font-size: 34px;
+    color: #fff;
+    z-index: 10002;
   }
 
-  .mobile-nav-active .navmenu>ul {
-    display: block;
-    animation: slideIn 0.3s ease-out;
-  }
-
-  @keyframes slideIn {
+  @keyframes fadeIn {
     from {
-      transform: translateY(-20px);
       opacity: 0;
     }
-
     to {
-      transform: translateY(0);
       opacity: 1;
     }
   }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 }
+
 
 
 /*--------------------------------------------------------------
 # Global Footer
 --------------------------------------------------------------*/
-.footer {
-
-  color: var(--default-color);
-  background-color: #f9f9f9 !important;
-  font-size: 14px;
-  padding: 40px 0;
-  position: relative;
+ footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+      /* Push it to the bottom of the page */
+      padding-top: 50px !important;
 }
 
+/* Icon styling */
 .footer .icon {
-  color: var(--accent-color);
-  margin-right: 15px;
-  font-size: 24px;
-  line-height: 0;
+    color: var(--accent-color);
+    margin-right: 15px;
+    font-size: 24px;
+    line-height: 0;
 }
 
 .footer h4 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 .footer .address p {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .footer .social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
-  font-size: 16px;
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
-  margin-right: 10px;
-  transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
+    font-size: 16px;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    margin-right: 10px;
+    transition: 0.3s;
 }
 
 .footer .social-links a:hover {
-  color: var(--accent-color);
-  border-color: var(--accent-color);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .footer .copyright {
-  padding-top: 20px;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .footer .copyright p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .footer .credits {
-  margin-top: 5px;
-  font-size: 13px;
+    margin-top: 5px;
+    font-size: 13px;
 }
-
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -573,7 +573,7 @@ h6 {
   inset: 0;
   z-index: 9999;
   overflow: hidden;
-  background-color: var(--background-color);
+  background-color: #fff;
   transition: all 0.6s ease-out;
   width: 100%;
   height: 100vh;
@@ -617,8 +617,8 @@ h6 {
   position: fixed;
   visibility: hidden;
   opacity: 0;
-  right: 15px;
-  bottom: -95px;
+  right: 25px !important;
+  bottom: 10px !important;
   z-index: 99999;
   background-color: var(--accent-color);
   width: 44px;
@@ -702,8 +702,6 @@ section,
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 60px 0;
-  align-items: center;
-  justify-content: center;
   scroll-margin-top: 92px;
   overflow: clip;
 }
@@ -798,7 +796,7 @@ section,
   font-size: 16px;
   transition: 0.5s;
   margin-left: 25px;
-  color: var(--default-color);
+  color: #fff;
   font-weight: 500;
 }
 

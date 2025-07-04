@@ -1,34 +1,80 @@
-<?php $basePath = '/college';
+<?php
+declare(strict_types=1);
 
-function authCheck($maxSessionTime = 86400)
+
+
+
+function encrypt(string $data, string $key): string {
+    $iv = openssl_random_pseudo_bytes(16);
+    $cipher = openssl_encrypt($data, 'AES-256-CBC', $key, 0, $iv);
+    return base64_encode($iv . $cipher);
+}
+
+// ── AES‑256‑CBC decrypt ───────────────────────────────────────────────────────
+function decrypt(string $data, string $key): string|false
 {
-    global $basePath;
+    $decoded = base64_decode($data, true);
+    if ($decoded === false || strlen($decoded) < 17) {
+        return false;                           // malformed input
+    }
+    $iv         = substr($decoded, 0, 16);
+    $ciphertext = substr($decoded, 16);
+    return openssl_decrypt($ciphertext, 'AES-256-CBC', $key, 0, $iv);
+}
 
-    if (!isset($_COOKIE['email']) || !isset($_COOKIE['user_type'])) {
-        header("Location: {$basePath}/login");
-        exit();
-    } else if ($_COOKIE['user_type'] == "admin") {
-        header("Location: {$basePath}/admin/index");
-        exit();
-    } else {
-        header("Location: {$basePath}/users/index");
+// ── Config ────────────────────────────────────────────────────────────────────
+const MAX_SESSION_TIME = 86_400;                    // 24 h
+const SECRET_KEY       = 'your-very-strong-32-char-key!1234567890abcd';
+
+/**
+ * Verify auth cookies & session lifetime.
+ * Redirects to /login on failure; otherwise returns
+ *     ['email' => string, 'userType' => 'admin'|'user']
+ */
+function requireLogin(): array     
+{
+    // 1️⃣ Cookies present?
+    if (!isset($_COOKIE['email'], $_COOKIE['user_type'], $_COOKIE['login_time'])) {
+        header('Location: /college/login');
         exit();
     }
 
+    // 2️⃣ Decrypt
+    $email     = decrypt($_COOKIE['email'],     SECRET_KEY);
+    $userType  = decrypt($_COOKIE['user_type'], SECRET_KEY);
+    $loginTime = decrypt($_COOKIE['login_time'], SECRET_KEY);
 
-
-    if (isset($_SESSION['login_time'])) {
-        if ((time() - $_COOKIE['login_time']) > $maxSessionTime) {
-            session_unset();
-            session_destroy();
-
-            header("Location: {$basePath}/login?session_expired=1");
-            exit();
-        } else {
-            $_COOKIE['login_time'] = time();
-        }
-    } else {
-        header("Location: {$basePath}/login");
+    // 3️⃣ Validate
+    if (!$email || !$userType || !$loginTime || !ctype_digit($loginTime)) {
+        header('Location: /college/login');
         exit();
     }
+
+    // 4️⃣ Max session age
+    if (time() - (int) $loginTime > MAX_SESSION_TIME) {
+        header('Location: /college/login?session_expired=1');
+        exit();
+    }
+
+    return ['email' => $email, 'userType' => $userType];
+}
+
+/**
+ * Call once, right after a successful login, to send the user to
+ * their dashboard.
+ */
+function routeAfterLogin(string $userType): void    // ← use “void”
+{
+    switch ($userType) {
+        case 'admin':
+            header('Location: /college/admin/index');
+            break;
+        case 'user':
+            header('Location: /college/users/index');
+            break;
+        default:
+            header('Location: /college/login');
+            break;
+    }
+    exit();
 }

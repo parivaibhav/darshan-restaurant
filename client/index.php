@@ -84,36 +84,49 @@ shuffle($feedbacks);
 <body class="index-page">
 
     <?php include 'header.php'; ?>
-    <main class="main" >
+    <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section light-background">
+        <!-- Hero Section -->
+        <section id="hero" class="hero section position-relative p-0 m-0" style="height: 100vh; min-height: 500px; overflow: hidden;">
+            <!-- Fullscreen Video Background -->
+            <video
+                src="../assets/hero.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="position-absolute top-0 start-0 w-100 h-100"
+                style="object-fit: cover; z-index: 1;">
+            </video>
 
-            <div class="container">
-                <div class="row gy-4 justify-content-center justify-content-lg-between">
-                    <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                        <h1 id="animated-heading" >
-                            <span class="line">Enjoy Your Healthy</span>
-                            <span class="line">Delicious Food</span>
+            <!-- Overlay for better text visibility (optional) -->
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.35); z-index: 2;"></div>
+
+            <!-- Absolute Centered Text Content -->
+            <div class="container h-100 position-relative" style="z-index: 3;">
+                <div class="row h-100 align-items-center justify-content-center">
+                    <div class="col-lg-8 mx-auto text-center text-white position-absolute top-50 start-50 translate-middle" style="z-index: 4;">
+                        <h1 id="animated-heading" class="display-3 fw-bold mb-3">
+                            <span class="d-block text-white heading-left">Enjoy Your Healthy</span>
+                            <span class="d-block text-white heading-right">Delicious Food</span>
                         </h1>
-
-                        <!---->
-                        <p id="animated-text">
+                        <p id="animated-text" class="lead mb-4 text-white">
                             Savor authentic flavors at Darshan Restaurant, where every dish is crafted with fresh ingredients, bold spices, and timeless recipes.
                         </p>
-                        <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                            <a href="#book-a-table" class="btn-get-started">Booka a Table</a>
-                            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                            <a href="#book-a-table" class="btn-get-started">Book a Table</a>
+                            <a href="https://youtu.be/mqfTD3DzbwY?si=g2ItlnvzsRz9Vl6A" class="glightbox btn-watch-video d-flex align-items-center justify-content-center">
+                                <i class="bi bi-play-circle fs-4"></i>
+                                <span class="ms-2 ">Watch Video</span>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                        <img src="../assets/img/hero-img.png" class="img-fluid animated rounded" alt="">
-                    </div>
-
                 </div>
             </div>
-
-        </section><!-- /Hero Section -->
+        </section>
+        <!-- /Hero Section -->
 
 
 
@@ -599,7 +612,7 @@ shuffle($feedbacks);
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-   
+
 
 
 
@@ -668,7 +681,7 @@ shuffle($feedbacks);
         });
     </script>
 
-  
+
 
 
 </body>

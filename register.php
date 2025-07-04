@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,9 +32,13 @@
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required>
-                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                                <div class="input-group">
+                                
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="name@example.com" required>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>

@@ -1,3 +1,25 @@
+<?php
+require_once __DIR__ . '/includes/auth_check.php';
+
+$userType = null;
+
+if (isset($_COOKIE['user_type'])) {
+    $userType = decrypt($_COOKIE['user_type'], SECRET_KEY);
+}
+
+if ($userType === 'admin') {
+    header('Location: /college/admin/index');
+    exit();
+}
+
+if ($userType === 'user') {
+    header('Location: /college/users/index');
+    exit();
+}
+
+
+?>
+
 <style>
     .btn-grp {
         width: 30% !important;
@@ -35,11 +57,7 @@
                 <li><a href="aboutus">About</a></li>
                 <li><a href="menu">Menu</a></li>
                 <li><a href="contactus">Contact</a></li>
-                <li>
-                    <div class="d-flex flex-sm-column gap-3 d-lg-none btn-group-lg px-3">
-                        <a class="btn btn-primary text-white" href="/college/login.php">Login</a>
-                    </div>
-                </li>
+
             </ul>
         </nav>
 
@@ -47,7 +65,8 @@
 
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </div>
-    <div class=" d-flex justify-content-center align-items-center px-3" style="width:30%; word-wrap: inherit; ">
+    <div class=" d-flex justify-content-center align-items-center " style="width:30%; word-wrap: inherit; ">
+        <a class="d-none d-xl-flex btn-sm custom-signup-btn ms-2" href="/college/register" style="font-size:clamp(0.85rem, 2vw, 1.1rem);">Sign up</a>
         <div class="login-box">
             <button class="login-btn" onclick="window.location.href='/college/login'">
                 Login
@@ -155,7 +174,7 @@
                 </div>
             </button>
         </div>
-        <a class="d-none d-xl-flex btn-sm custom-signup-btn ms-2" href="/college/register" style="font-size:clamp(0.85rem, 2vw, 1.1rem);">Sign up</a>
+
     </div>
 </header>
 
