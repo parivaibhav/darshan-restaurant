@@ -24,7 +24,7 @@ function decrypt(string $data, string $key): string|false
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const MAX_SESSION_TIME = 86_400;                    // 24 h
-const SECRET_KEY       = 'your-very-strong-32-char-key!1234567890abcd';
+const SECRET_KEY       = 'mysecretkey';
 
 /**
  * Verify auth cookies & session lifetime.
@@ -77,4 +77,25 @@ function routeAfterLogin(string $userType): void    // ← use “void”
             break;
     }
     exit();
+}
+
+/**
+ * Returns user info from cookies if logged in, or null if not. Never redirects.
+ * @return array|null
+ */
+function getUserFromCookie(): ?array
+{
+    if (!isset($_COOKIE['email'], $_COOKIE['user_type'], $_COOKIE['login_time'])) {
+        return null;
+    }
+    $email     = decrypt($_COOKIE['email'],     SECRET_KEY);
+    $userType  = decrypt($_COOKIE['user_type'], SECRET_KEY);
+    $loginTime = decrypt($_COOKIE['login_time'], SECRET_KEY);
+    if (!$email || !$userType || !$loginTime || !ctype_digit($loginTime)) {
+        return null;
+    }
+    if (time() - (int) $loginTime > MAX_SESSION_TIME) {
+        return null;
+    }
+    return ['email' => $email, 'userType' => $userType];
 }

@@ -23,13 +23,13 @@ if ($catResult && $catResult->num_rows > 0) {
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Menu Management </title>
+    <title>Darshan Restaurant | Menu Management</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
     <!-- Favicons -->
     <link href="../assets/img/logo.png" rel="icon" />
-
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -47,22 +47,53 @@ if ($catResult && $catResult->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Main CSS File -->
     <link href="../assets/css/main.css" rel="stylesheet" />
-   
+    <script src="../assets/js/modetoggle.js" defer></script>
+    <style>
+    .add-btn {
+  border: 2px solid #24b4fb;
+  background-color: #24b4fb;
+  border-radius: 0.9em;
+  cursor: pointer;
+  padding: 0.8em 1.2em 0.8em 1em;
+  transition: all ease-in-out 0.2s;
+  font-size: 16px;
+  margin-left:50px;
+  margin-bottom:30px;
+}
+
+ .add-btn span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+
+ .add-btn:hover {
+  background-color: #0071e2;
+}
+    </style>
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+  
+ <?php include  __DIR__ .  '/header.php'; ?>
 
-    <section id="menu" class="menu section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <h2>Our Menu</h2>
-            <p><span>Check Our</span> <span class="description-title">Darshan Menu</span></p>
-        </div>
-        <!-- End Section Title -->
 
-        <button class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#addMenuModal">
-            <i class="fa-solid fa-plus"></i> Add Menu Item
+    <section class='menu'>
+      <button data-bs-toggle="modal" data-bs-target="#addMenuModal" class="add-btn">
+            <span>
+                <svg
+                   height="24"
+                   width="24"
+                     viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                 >
+                     <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+              </svg>
+              Add Menu Item
+            </span>
         </button>
 
         <!-- Add Menu Item Modal -->
@@ -118,8 +149,8 @@ if ($catResult && $catResult->num_rows > 0) {
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Add Item</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">Add Item</button>
                     </div>
                 </form>
             </div>
@@ -139,9 +170,9 @@ if ($catResult && $catResult->num_rows > 0) {
         </ul>
 
         <!-- Tab contents -->
-        <div class="tab-content mt-5" id="menuTabContent">
+        <div class="tab-content " id="menuTabContent">
             <?php foreach ($categories as $index => $cat): ?>
-                <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>" id="content-<?= md5($cat) ?>" role="tabpanel"
+                <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?> mt-5" id="content-<?= md5($cat) ?>" role="tabpanel"
                     aria-labelledby="tab-<?= md5($cat) ?>">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
@@ -155,7 +186,7 @@ if ($catResult && $catResult->num_rows > 0) {
                                 while ($item = $itemsResult->fetch_assoc()):
                             ?>
                                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                                        <div class="card h-100 shadow-sm border-0 p-3">
+                                        <div class="card h-100 shadow-sm border-0 p-3 m-2">
                                             <img src="<?= htmlspecialchars($imageBasePath . $item['menu_image']) ?>" class="card-img-top"
                                                 alt="<?= htmlspecialchars($item['menu_name']) ?>"
                                                 style="object-fit: cover; height: 200px; width: 100%;" loading="lazy" />
@@ -165,10 +196,10 @@ if ($catResult && $catResult->num_rows > 0) {
                                                     <?= htmlspecialchars($item['menu_description']) ?>
                                                 </p>
                                                 <div class="mt-auto">
-                                                    <p class="mb-3 fs-5 fw-bold">₹<?= number_format($item['menu_price'], 2) ?></p>
-                                                    <div class="d-grid gap-2 gap-md-3">
+                                                    <p class="mb-3 fs-5 fw-bold">₹<?= number_format($item['menu_price']) ?></p>
+                                                    <div class="d-flex w-100 flex-column">
                                                         <!-- Edit button -->
-                                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                        <button type="button" class="btn  btn-warning flex-fill mb-3" data-bs-toggle="modal"
                                                             data-bs-target="#editModal" data-id="<?= $item['menu_id'] ?>"
                                                             data-name="<?= htmlspecialchars($item['menu_name']) ?>"
                                                             data-description="<?= htmlspecialchars($item['menu_description']) ?>"
@@ -179,7 +210,7 @@ if ($catResult && $catResult->num_rows > 0) {
                                                         </button>
 
                                                         <!-- Delete button -->
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        <button type="button" class="btn  btn-danger flex-fill" data-bs-toggle="modal"
                                                             data-bs-target="#deleteModal" data-id="<?= $item['menu_id'] ?>"
                                                             data-name="<?= htmlspecialchars($item['menu_name']) ?>">
                                                             Delete
@@ -203,7 +234,7 @@ if ($catResult && $catResult->num_rows > 0) {
                 </div>
             <?php endforeach; ?>
         </div>
-
+        <?php include  __DIR__ .  '/../footer.php'; ?>
         <!-- Edit Menu Item Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -298,13 +329,13 @@ if ($catResult && $catResult->num_rows > 0) {
         </div>
     </section>
 
-    <?php include 'footer.php'; ?>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+
     <script src="../assets/js/formvalidation.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         // Edit Modal population
@@ -343,6 +374,7 @@ if ($catResult && $catResult->num_rows > 0) {
             document.getElementById('delete-menu-name').textContent = name;
         });
     </script>
+            <script src="../assets/vendor/sweetalert/sweetalert.js"></script>
     <?php if (isset($_SESSION['msg'])): ?>
         <script>
             Swal.fire({
@@ -354,7 +386,7 @@ if ($catResult && $catResult->num_rows > 0) {
         </script>
         <?php unset($_SESSION['msg']); ?>
     <?php endif; ?>
-   
+ <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

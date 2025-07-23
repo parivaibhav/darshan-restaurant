@@ -3,7 +3,7 @@
 include __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/auth_check.php';
 $user = requireLogin();
-$email = $user['email'];
+$_SESSION['email']= $user['email'];
 
 // Only users allowed (not admins)
 if ($user['userType'] !== 'user') {
@@ -73,7 +73,7 @@ if (!empty($email)) {
             <button class="avatar-btn" id="avatarDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="<?= htmlspecialchars($email) ?>">
                 <img src="<?= "../" . htmlspecialchars($imgPath) ?>" alt="User Avatar" class="avatar-img" />
             </button>
-
+    
             <ul class="dropdown-menu shadow" aria-labelledby="avatarDropdown">
                 <li>
                     <!-- Button trigger modal -->

@@ -1,7 +1,7 @@
 
 
 
-<footer id="footer" class="footer bg-white ">
+<footer id="footer" class="footer bg-white px-5 ">
 
     <div class="container">
         <div class="row gy-3">

@@ -36,7 +36,7 @@ shuffle($feedbacks);
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Project</title>
+    <title>Darshan Restaurant | Home</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -67,6 +67,43 @@ shuffle($feedbacks);
             background-position: center;
         }
 
+        /* Book Now Button Styling */
+        .btn-book-now {
+            border-radius: 50px !important;
+            font-size: 1.1rem !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            background: linear-gradient(45deg, #ce1212, #ff4444) !important;
+            box-shadow: 0 4px 15px rgba(206, 18, 18, 0.3) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-book-now:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(206, 18, 18, 0.4) !important;
+            background: linear-gradient(45deg, #b01010, #e63939) !important;
+        }
+
+        .btn-book-now:active {
+            transform: translateY(0) !important;
+        }
+
+        .btn-book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-book-now:hover::before {
+            left: 100%;
+        }
+
         .testimonial-item {
             background: #f8f9fa;
             border-radius: 8px;
@@ -76,7 +113,7 @@ shuffle($feedbacks);
         }
 
         .testimonial-content p {
-            font-style: italic;
+            font-style: italic ;
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
@@ -218,9 +255,7 @@ shuffle($feedbacks);
     </style>
 
 
-    <script src="assets/js/modetoggle.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 
 
 </head>
@@ -232,7 +267,7 @@ shuffle($feedbacks);
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section position-relative p-0 m-0" style="height: 100vh; min-height: 500px; overflow: hidden;">
+        <section id="hero" class="hero section position-relative p-0 m-0" style="height: 86.8vh; min-height: 500px; overflow: hidden;">
             <!-- Fullscreen Video Background -->
             <video
                 src="./assets/hero.mp4"
@@ -252,10 +287,10 @@ shuffle($feedbacks);
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-lg-8 mx-auto text-center text-white position-absolute top-50 start-50 translate-middle" style="z-index: 4;">
                         <h1 id="animated-heading" class="display-3 fw-bold mb-3">
-                            <span class="d-block text-white heading-left">Enjoy Your Healthy</span>
-                            <span class="d-block text-white heading-right">Delicious Food</span>
+                            <span class="d-block text-white " data-aos="fade-right" data-aos-delay="200">Enjoy Your Healthy</span>
+                            <span class="d-block text-white" data-aos="fade-left" data-aos-delay="300">Delicious Food</span>
                         </h1>
-                        <p id="animated-text" class="lead mb-4 text-white">
+                        <p id="animated-text" class="lead mb-4 text-white" data-aos="fade-up" data-aos-delay="100">
                             Savor authentic flavors at Darshan Restaurant, where every dish is crafted with fresh ingredients, bold spices, and timeless recipes.
                         </p>
 
@@ -360,10 +395,10 @@ shuffle($feedbacks);
                     ?>
                             <div
                                 class="testimonial-item bg-light p-3 rounded d-flex flex-column align-items-center"
-                                style="min-width: 300px; height: 220px; flex-shrink: 0;">
+                                style="min-width: 300px; height: 250px; flex-shrink: 0;">
 
                                 <img src="<?= $randomImage ?>" alt="User Image"
-                                    style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin-bottom: 10px; border: 2px solid #007bff;">
+                                    style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin-bottom: 10px; border: 2px solid #ffc107;">
 
                                 <p class="text-center" style="flex-grow: 1; margin-bottom: 10px;">
                                     <i class="bi bi-quote quote-icon-left"></i>
@@ -502,7 +537,7 @@ shuffle($feedbacks);
                         <div class="team-member">
                             <div class="member-img">
                                 <img src="assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="Chef Walter White">
-                                <div class="social">
+                                <div class="social ">
                                     <a href="#"><i class="bi bi-twitter-x"></i></a>
                                     <a href="#"><i class="bi bi-facebook"></i></a>
                                     <a href="#"><i class="bi bi-instagram"></i></a>
@@ -567,7 +602,7 @@ shuffle($feedbacks);
         <section id="book-a-table" class="book-a-table section">
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Book A Table</h2>
+                <h2 >Book A Table</h2>
                 <p><span>Book Your</span> <span class="description-title">Stay With Us<br></span></p>
             </div><!-- End Section Title -->
 
@@ -579,7 +614,7 @@ shuffle($feedbacks);
 
                     <!-- Form Section -->
                     <div class="col-lg-8 bg-white p-5">
-                        <h2 class="text-center mb-4 fw-bold text-primary">Book a Table</h2>
+                        <h2 class="text-center mb-4 fw-bold text-dark">Book a Table</h2>
                         <form action="./includes/booking_table.php" method="post" class=" needs-validation" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-4">
@@ -615,7 +650,9 @@ shuffle($feedbacks);
                             </div>
 
                             <div class="text-center mt-4">
-                                <button class="btn btn-primary btn-lg px-5 shadow-sm">Book Now</button>
+                                <button class="btn btn-danger btn-lg px-5 py-3 fw-bold btn-book-now">
+                                    <i class="bi bi-calendar-check me-2"></i>Book Now
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -732,11 +769,10 @@ shuffle($feedbacks);
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>

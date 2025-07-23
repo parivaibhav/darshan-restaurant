@@ -5,13 +5,13 @@ session_start();
 require_once __DIR__ . '/db.php';        // defines $conn (mysqli)
 require_once __DIR__ . '/auth_check.php'; // defines encrypt(), SECRET_KEY, routeAfterLogin()
 
-/* ─── Only accept POST ─────────────────────────────────────────────────────── */
+/* Only accept POST  */
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: /college/login');
     exit();
 }
 
-/* ─── Input validation ────────────────────────────────────────────────────── */
+/* Input validation */
 $userEmail = trim($_POST['useremail'] ?? '');
 $password  = $_POST['password'] ?? '';
 
@@ -21,7 +21,7 @@ if ($userEmail === '' || $password === '') {
     exit();
 }
 
-/* ─── Fetch user with a prepared statement ────────────────────────────────── */
+/*  Fetch user with a prepared statement  */
 $stmt = $conn->prepare('SELECT email, password, user_type FROM users WHERE email = ? LIMIT 1');
 if (!$stmt) {
     $_SESSION['msg'] = ['type' => 'error', 'text' => 'Database error'];
@@ -35,14 +35,14 @@ $result = $stmt->get_result();
 $user   = $result->fetch_assoc();
 $stmt->close();
 
-/* ─── Verify credentials ──────────────────────────────────────────────────── */
+/*  Verify credentials  */
 if (!$user || !password_verify($password, $user['password'])) {
     $_SESSION['msg'] = ['type' => 'error', 'text' => 'Invalid credentials'];
     header('Location: /college/login');
     exit();
 }
 
-/* ─── Successful login ────────────────────────────────────────────────────── */
+/*  Successful login  */
 $now          = time();
 $cookieMaxAge = 86400; // 24 h
 
@@ -52,5 +52,5 @@ setcookie('login_time', encrypt((string) $now,      SECRET_KEY), $now + $cookieM
 
 $_SESSION['msg'] = ['type' => 'success', 'text' => 'Login successful!'];
 
-/* ─── Redirect based on role ──────────────────────────────────────────────── */
+/*  Redirect based on role  */
 routeAfterLogin($user['user_type']);

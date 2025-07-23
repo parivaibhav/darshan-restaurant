@@ -2,7 +2,6 @@
 
 
 
-
 ?>
 
 
@@ -12,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Project</title>
+    <title>Darshan Restaurant | Contact</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -34,6 +33,33 @@
 
     <!-- Main CSS File -->
     <link href="../assets/css/main.css" rel="stylesheet">
+    <style> .feedback-form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .rating input[type="radio"] {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 1.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .rating input:checked~label,
+        .rating label:hover,
+        .rating label:hover~label {
+            color: #ffc107;
+        }</style>
 
 
     <script src="../assets/js/modetoggle.js" defer></script>
@@ -88,7 +114,7 @@
                         <i class="icon bi bi-envelope flex-shrink-0"></i>
                         <div>
                             <h3>Email Us</h3>
-                            <p>darshanhotel@gmail.com</p>
+                            <p>darshanrestaurant@gmail.com</p>
                         </div>
                     </div>
                 </div><!-- End Info Item -->
@@ -161,19 +187,16 @@
         </div>
 
     </section><!-- /Contact Section -->
-    <?php include 'footer.php'; ?>
+    <?php include __DIR__ .'/../footer.php'; ?>
 
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Preloader -->
-    <div id="preloader"></div>
+    <!--<div id="preloader"></div>-->
 
-    <!-- Add this inside <body> -->
-    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
+
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

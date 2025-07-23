@@ -11,6 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Check if email already exists
+    $check_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $check_stmt->bind_param("s", $email);
+    $check_stmt->execute();
+    $result = $check_stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $_SESSION['msg'] = ['type' => 'error', 'text' => 'Email already exists. Please use a different email.'];
+        $check_stmt->close();
+        $conn->close();
+        header("Location: /college/admin/users");
+        exit;
+    }
+    $check_stmt->close();
+
     $stmt = $conn->prepare("INSERT INTO users (email, password, user_type) VALUES (?, ?, 'admin')");
     $stmt->bind_param("ss", $email, $password);
     
@@ -23,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 
-         header("Location: /college/admin/users");
+    header("Location: /college/admin/users");
     exit;
 }
 ?>

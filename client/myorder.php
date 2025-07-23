@@ -1,10 +1,13 @@
 <?php
 
 include __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/auth_check.php';
+$user = requireLogin();
+$email = $user['email'];
 
 
 
-$email = $_SESSION['email'];
+
 
 // Fetch user's orders with date
 $sql = "SELECT menu_name, quantity, total_price, status, address, mobile, order_date 
@@ -81,14 +84,11 @@ $result = $stmt->get_result();
         </div>
     </section>
 
-    <?php include 'footer.php'; ?>
-    <!-- Add this inside <body> -->
-    <div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-        </svg></div>
+    <?php include __DIR__ .'/../footer.php'; ?>
+  
 
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/cursoranimation.js"></script>
+
 </body>
 
 </html>

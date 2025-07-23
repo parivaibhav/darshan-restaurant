@@ -37,7 +37,7 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
-    <script src="assets/js/modetoggle.js" defer></script>
+
 
 </head>
 
@@ -56,8 +56,8 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
                             <div class="mb-3">
                                 <label for="useremail" class="form-label">Email address</label>
                                 <div class="input-group ">
-                                    <input type="email" class="form-control" id="useremail" name="useremail" placeholder="name@example.com" required>
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control" id="useremail" name="useremail" placeholder="name@example.com" required>
                                     <div class="invalid-feedback">Please enter a valid email address.</div>
                                 </div>
                             </div>
@@ -66,8 +66,8 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group ">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                                     <div class="invalid-feedback">Password is required.</div>
                                 </div>
                             </div>
@@ -114,6 +114,18 @@ if (isset($_GET['session_expired']) && $_GET['session_expired'] == 1) {
                 icon: 'warning',
                 title: 'Session Expired',
                 text: 'Your session has expired. Please log in again.',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['error']) && $_GET['error'] == 'unauthorized'):
+    ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Access Denied',
+                text: 'Only parivaibhav@gmail.com can access the admin dashboard.',
                 confirmButtonText: 'OK'
             });
         </script>

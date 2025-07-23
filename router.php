@@ -24,6 +24,7 @@ switch ($request_uri) {
     case 'contactus':
     case 'login':
     case 'register':
+    
 
         require __DIR__ . "/$request_uri.php";
         break;
@@ -48,6 +49,10 @@ switch ($request_uri) {
        
         require __DIR__ . "/admin/" . basename($request_uri) . ".php";
         break;
+
+   case 'logout':
+            include './includes/logout.php';
+            break;
 
     // Default 404
     default:

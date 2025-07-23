@@ -25,7 +25,7 @@ shuffle($feedbacks);
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Project</title>
+    <title>Darshan Restaurant | Home</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -76,7 +76,7 @@ shuffle($feedbacks);
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="../assets/js/modetoggle.js" defer></script>
+   
 
 
 </head>
@@ -87,7 +87,7 @@ shuffle($feedbacks);
     <main class="main">
 
         <!-- Hero Section -->
-        <!-- Hero Section -->
+   
         <section id="hero" class="hero section position-relative p-0 m-0" style="height: 100vh; min-height: 500px; overflow: hidden;">
             <!-- Fullscreen Video Background -->
             <video
@@ -376,7 +376,7 @@ shuffle($feedbacks);
 
                 </div>
             </div>
-        </section>><!-- /Events Section -->
+        </section><!-- /Events Section -->
 
         <!-- Chefs Section -->
         <section id="chefs" class="chefs section">
@@ -607,7 +607,7 @@ shuffle($feedbacks);
 
     </main>
 
-    <?php include 'footer.php'; ?>
+    <?php include __DIR__ .'/../footer.php'; ?>
 
 
     <!-- Scroll Top -->
@@ -629,8 +629,8 @@ shuffle($feedbacks);
 
     <!-- Main JS File -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/fromvalidaiton.js"></script>
-    <script src="../assets/js/cursoranimation.js"></script>
+    <script src="../assets/js/formvalidation.js"></script>
+  
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert CDN -->
     <?php if (isset($_SESSION['msg'])): ?>

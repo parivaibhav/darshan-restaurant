@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Darshan Restaurant | Page Not Found</title>
     <link rel="stylesheet" href="assets/scss/404.css">
     <style>
         .button {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Darshan Restaurent | Sign up Page</title>
+    <title>Darshan Restaurant | Register</title>
 
     <!-- Favicons -->
     <link href="assets/img/logo.png" rel="icon">
@@ -168,8 +168,8 @@
 
                 Swal.fire({
                     icon: 'error',
-                    title: 'Weak Password',
-                    text: 'Please use a stronger password.',
+                    title: 'Invalid Password',
+                    text: 'Min 3 chars, 1 symbol, 1 number required.',
                 });
                 return false;
             }

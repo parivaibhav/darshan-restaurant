@@ -1,9 +1,9 @@
 
 
 
-<footer id="footer" class="footer bg-white">
+<footer id="footer" class="footer bg-white p-4">
 
-    <div class="container">
+    <div class="container p-3">
         <div class="row gy-3">
             <div class="col-lg-3 col-md-6 d-flex">
                 <i class="bi bi-geo-alt icon"></i>
@@ -22,7 +22,7 @@
                     <h4>Contact</h4>
                     <p>
                         <strong>Phone:</strong> <span>+91 8799064890</span><br>
-                        <strong>Email:</strong> <span>darshanhotel@gmail.com</span><br>
+                        <strong>Email:</strong> <span>darshanrestaurant@gmail.com</span><br>
                     </p>
                 </div>
             </div>

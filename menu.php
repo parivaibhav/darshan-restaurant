@@ -39,7 +39,7 @@ foreach ($foundCategories as $cat) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Our Menu</title>
+    <title>Darshan Restaurant | Menu</title>
 
     <!-- Favicons -->
     <link href="assets/img/logo.png" rel="icon">
@@ -89,8 +89,8 @@ foreach ($foundCategories as $cat) {
         <div class="tab-content mt-5" id="menuTabContent">
             <?php foreach ($categories as $index => $cat): ?>
                 <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>"
-                    id="content-<?= md5($cat) ?>" role="tabpanel">
-                    <div class="container">
+                    id="content-<?= md5($cat) ?>" role="tabpanel" >
+                    <div class="container" >
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                             <?php
                             $stmt = $conn->prepare("SELECT * FROM menu WHERE menu_category = ?");
@@ -102,7 +102,7 @@ foreach ($foundCategories as $cat) {
                                 while ($item = $itemsResult->fetch_assoc()):
                             ?>
                                     <div class="col">
-                                        <div class="card h-100 shadow-sm border-0 p-2 ">
+                                        <div class="card h-100 shadow-sm border-0 p-2 " data-aos="fade-up" data-aos-delay="<?= $index * 100 ?>">
                                             <img src="<?= htmlspecialchars($item['menu_image']) ?>"
                                                 class="card-img-top"
                                                 alt="<?= htmlspecialchars($item['menu_name']) ?>"

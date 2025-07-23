@@ -21,13 +21,10 @@
   font-weight: 300;
 }
 
-
 :root {
   --default-font: "font2", system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -75,8 +72,7 @@ body {
   color: var(--default-color);
   background-color: #fff5f5 !important;
   font-family: var(--default-font);
-  cursor:default !important;
-
+  cursor: default !important;
 }
 
 a {
@@ -97,7 +93,6 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-
 }
 
 /* Pulsating Play Button
@@ -105,8 +100,10 @@ h6 {
 .pulsating-play-btn {
   width: 94px;
   height: 94px;
-  background: radial-gradient(var(--accent-color) 50%,
-      color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
+  background: radial-gradient(
+    var(--accent-color) 50%,
+    color-mix(in srgb, var(--accent-color), transparent 75%) 52%
+  );
   border-radius: 50%;
   display: block;
   position: relative;
@@ -180,8 +177,6 @@ h6 {
   }
 }
 
-
-
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
@@ -207,7 +202,6 @@ h6 {
   margin: 0;
   font-weight: 700;
   color: var(--heading-color);
-
 }
 
 .header .logo span {
@@ -273,12 +267,12 @@ h6 {
     position: relative;
   }
 
-  .navmenu>ul>li {
+  .navmenu > ul > li {
     white-space: nowrap;
     padding: 15px 14px;
   }
 
-  .navmenu>ul>li:last-child {
+  .navmenu > ul > li:last-child {
     padding-right: 0;
   }
 
@@ -305,7 +299,7 @@ h6 {
     transition: 0.3s;
   }
 
-  .navmenu>ul>li>a:before {
+  .navmenu > ul > li > a:before {
     content: "";
     position: absolute;
     height: 2px;
@@ -318,13 +312,13 @@ h6 {
   }
 
   .navmenu a:hover:before,
-  .navmenu li:hover>a:before,
+  .navmenu li:hover > a:before,
   .navmenu .active:before {
     visibility: visible;
     width: 100%;
   }
 
-  .navmenu li:hover>a,
+  .navmenu li:hover > a,
   .navmenu .active,
   .navmenu .active:focus {
     color: color-mix(in srgb, var(--nav-color) 80%, black 50%);
@@ -363,11 +357,11 @@ h6 {
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover>a {
+  .navmenu .dropdown ul li:hover > a {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .dropdown:hover>ul {
+  .navmenu .dropdown:hover > ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -379,7 +373,7 @@ h6 {
     visibility: hidden;
   }
 
-  .navmenu .dropdown .dropdown:hover>ul {
+  .navmenu .dropdown .dropdown:hover > ul {
     opacity: 1;
     top: 0;
     left: -100%;
@@ -399,9 +393,9 @@ h6 {
     position: relative;
   }
 
-   .navmenu ul h2{
-       margin-bottom:100px !important;
-   }
+  .navmenu ul h2 {
+    margin-bottom: 100px !important;
+  }
 
   .mobile-nav-toggle:hover {
     color: #0d6efd;
@@ -453,7 +447,7 @@ h6 {
     color: #333 !important;
     text-decoration: none;
     border-radius: 6px;
-   
+
     transition: background 0.3s ease, color 0.3s ease;
   }
 
@@ -501,69 +495,69 @@ h6 {
   }
 }
 
-
-
 /*--------------------------------------------------------------
 # Global Footer
 --------------------------------------------------------------*/
- footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto;
-      /* Push it to the bottom of the page */
-      padding-top: 50px !important;
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: auto;
+  /* Push it to the bottom of the page */
+  padding-top: 50px !important;
+  background-color: #ddd;
 }
 
 /* Icon styling */
 .footer .icon {
-    color: var(--accent-color);
-    margin-right: 15px;
-    font-size: 24px;
-    line-height: 0;
+  color: var(--accent-color);
+  margin-right: 15px;
+  font-size: 24px;
+  line-height: 0;
 }
 
 .footer h4 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .footer .address p {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .footer .social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
-    font-size: 16px;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
-    margin-right: 10px;
-    transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
+  font-size: 16px;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  margin-right: 10px;
+  transition: 0.3s;
 }
 
 .footer .social-links a:hover {
-    color: var(--accent-color);
-    border-color: var(--accent-color);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .footer .copyright {
-    padding-top: 20px;
-    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  padding-top: 20px;
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .footer .copyright p {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .footer .credits {
-    margin-top: 5px;
-    font-size: 13px;
+  margin-top: 5px;
+  font-size: 13px;
 }
 /*--------------------------------------------------------------
 # Preloader
@@ -669,7 +663,6 @@ h6 {
   font-size: 22px;
   font-weight: 400;
   margin-bottom: 10px;
-
 }
 
 .page-title .breadcrumbs ol {
@@ -683,11 +676,11 @@ h6 {
   font-weight: 400;
 }
 
-.page-title .breadcrumbs ol li+li {
+.page-title .breadcrumbs ol li + li {
   padding-left: 10px;
 }
 
-.page-title .breadcrumbs ol li+li::before {
+.page-title .breadcrumbs ol li + li::before {
   content: "/";
   display: inline-block;
   padding-right: 10px;
@@ -707,7 +700,6 @@ section,
 }
 
 @media (max-width: 1199px) {
-
   section,
   .section {
     scroll-margin-top: 56px;
@@ -742,7 +734,6 @@ section,
   font-weight: 500;
   font-size: clamp(1.5rem, 5vw, 3rem);
 }
-
 
 .section-title p .description-title {
   color: var(--accent-color);
@@ -864,7 +855,6 @@ section,
 }
 
 .about .book-a-table h3 {
-
   margin: 0 0 0 0;
   font-size: 24px;
 }
@@ -974,7 +964,6 @@ section,
   font-size: 20px;
   font-weight: 500;
   margin: 0 0 30px 0;
-
 }
 
 .why-us .icon-box p {
@@ -1054,7 +1043,8 @@ section,
   border-radius: 0;
   height: 100%;
   border: 0;
-  border-bottom: 2px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  border-bottom: 2px solid
+    color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
 @media (max-width: 575px) {
@@ -1073,7 +1063,6 @@ section,
   font-size: 18px;
   font-weight: 400;
   margin: 0;
-
 }
 
 @media (max-width: 575px) {
@@ -1123,11 +1112,9 @@ section,
   font-size: 24px;
   font-weight: 400;
   margin-bottom: 5px;
-
 }
 
 .menu .tab-content .menu-item .ingredients {
-
   color: color-mix(in srgb, var(--default-color), transparent 50%);
   margin-bottom: 5px;
 }
@@ -1357,7 +1344,6 @@ section,
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 20px;
-
 }
 
 .chefs .team-member .member-info span {
@@ -1384,7 +1370,6 @@ section,
   right: 8px;
   opacity: 1;
 }
-
 
 /*--------------------------------------------------------------
 # Gallery Section
@@ -1501,8 +1486,7 @@ section,
 .contact .php-email-form input[type="email"],
 .contact .php-email-form textarea {
   color:
-    /*var(--default-color)*/
-    #ce1212;
+    /*var(--default-color)*/ #ce1212;
   background-color: color-mix(in srgb, var(--surface-color), transparent 50%);
   border-color: color-mix(in srgb, var(--accent-color), transparent 80%);
   font-size: 14px;
@@ -1563,9 +1547,9 @@ section,
 }
 
 /* Highlight checked star and on hover */
-.rating input:checked+label,
+.rating input:checked + label,
 .rating label:hover,
-.rating label:hover~label {
+.rating label:hover ~ label {
   color: #ffc107;
 }
 
@@ -1584,7 +1568,6 @@ section,
   border-radius: 6px;
   box-shadow: 0 0 0 #ff0000;
   transition: all 0.3s ease-in-out;
-
 }
 
 .star-1 {
@@ -1724,7 +1707,6 @@ section,
   fill: #fffdef;
 }
 
-
 .login-box {
   width: 10rem !important;
   height: 100% !important;
@@ -1735,6 +1717,20 @@ section,
 
 .sitename {
   font-family: "font3" !important;
+}
 
+.avatar-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  margin-left: auto;
+}
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgb(135, 135, 135);
+  margin-left: auto;
 }
 

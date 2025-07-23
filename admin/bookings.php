@@ -31,7 +31,7 @@ switch ($filter) {
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Menu Management</title>
+    <title>Darshan Restaurant | Bookings</title>
 
     <!-- Favicons -->
     <link href="../assets/img/logo.png" rel="icon" />

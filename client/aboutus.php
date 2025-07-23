@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Project</title>
+    <title>Darshan Restaurant | About Us</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -80,16 +80,13 @@
 
     </section><!-- /About Section -->
 
-    <?php include 'footer.php'; ?>
+    <?php include __DIR__ .'/../footer.php'; ?>
 </body>
 
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<!-- Add this inside <body> -->
-<div id="custom-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-        <path fill="#000" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path>
-    </svg></div>
+
 
 <!-- Preloader -->
 <div id="preloader"></div>
@@ -104,7 +101,7 @@
 
 <!-- Main JS File -->
 <script src="../assets/js/main.js"></script>
-<script src="../assets/js/cursoranimation.js"></script>
+
 </body>
 
 </html>

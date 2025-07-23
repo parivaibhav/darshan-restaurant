@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Gallery Management</title>
+    <title>Darshan Restaurant | Admin Dashboard</title>
     <link href="../assets/img/logo.png" rel="icon" />
     <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
@@ -21,7 +21,7 @@
     <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <link href="../assets/css/main.css" rel="stylesheet" />
 
-    <script src="../assets/js/modetoggle.js" defer></script>
+  
 
     <style>
         /* Modern card styling */
@@ -95,7 +95,7 @@
 </head>
 
 <body class="index-page">
-    <?php include 'header.php'; ?>
+<?php include_once __DIR__ . '/header.php'; ?>
 
     <section class="section gallery py-5">
         <div class="container">
@@ -187,7 +187,7 @@
         </div>
     </section>
 
-    <?php include 'footer.php'; ?>
+    <?php include  __DIR__ .  '/../footer.php'; ?>
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center shadow-sm rounded-circle">
