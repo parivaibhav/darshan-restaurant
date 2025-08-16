@@ -1,7 +1,7 @@
 <?php
 
 
-$host = "localhost:3307" ;
+$host = "localhost:3307" ; // or localhost
 $db = "darshanrestaurant";
 $user = "root";
 $password = "";

@@ -6,6 +6,8 @@ This is a full-featured **Food Restaurant Website** built in **PHP**, including 
 
 ---
 
+#### ADMIN USER PARIVAIBHAV@GMAIL.COM AND PASSWORD IS ADMIN@123
+
 ## 👥 Modules & Functionalities
 
 ### 🔐 Admin Module (`/admin`)
