@@ -73,9 +73,7 @@ $isSpecialEmail = ($email === 'parivaibhav@gmail.com');
 
         <a href="/college/admin/index" class="logo d-flex align-items-center me-auto me-xl-0">
             <h1 class="sitename text-danger">Darshan Restaurant</h1>
-            <?php if ($isSpecialEmail): ?>
-                <span class="badge bg-success ms-2" style="font-size: 0.7rem;">Special Access</span>
-            <?php endif; ?>
+           
         </a>
 
         <nav id="navmenu" class="navmenu mx-auto">
@@ -201,7 +199,7 @@ document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const confirmPw = document.getElementById('confirmPw');
   const saveBtn   = document.getElementById('saveBtn');
 
-  const rule = /^(?=(?:.*\d){3,})(?=.*[!@#$%^&*()_+\-=[\\]{};':"\\|,.<>\\/?]).{3,}$/;
+ const rule = /^(?=(?:.*\d){3,})(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?]).{6,}$/;
 
   function validate() {
     const ruleOK  = rule.test(newPw.value);

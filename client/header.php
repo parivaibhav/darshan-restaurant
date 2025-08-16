@@ -1,11 +1,14 @@
 <?php
-// db.php should contain $conn = new mysqli(...)
+// Include database and authentication
 include __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/auth_check.php';
-$user = requireLogin();
-$_SESSION['email']= $user['email'];
 
-// Only users allowed (not admins)
+// Ensure user is logged in
+$user = requireLogin();
+$_SESSION['email'] = $user['email'];
+$email = $_SESSION['email'];
+
+// Redirect admin to admin dashboard
 if ($user['userType'] !== 'user') {
     if ($user['userType'] === 'admin') {
         header('Location: /college/admin/index');
@@ -15,20 +18,19 @@ if ($user['userType'] !== 'user') {
     exit();
 }
 
+// Default profile image path
+$imgPath = 'assets/img/usersprofiles/profilepic.jpg';
 
-$imgPath = 'assets/img/usersprofiles/profilepic.jpg'; // Default
+// Fetch user's profile image from DB if exists
+$stmt = $conn->prepare("SELECT user_img FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->bind_result($fetchedImg);
 
-if (!empty($email)) {
-    $stmt = $conn->prepare("SELECT user_img FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->bind_result($fetchedImg);
-    if ($stmt->fetch() && !empty($fetchedImg) && file_exists(__DIR__ . '/../' . ltrim($fetchedImg, '/\\'))) {
-        $imgPath = $fetchedImg;
-    }
-
-    $stmt->close();
+if ($stmt->fetch() && !empty($fetchedImg) && file_exists(__DIR__ . '/../' . ltrim($fetchedImg, '/\\'))) {
+    $imgPath = $fetchedImg;
 }
+$stmt->close();
 ?>
 
 <style>
@@ -47,7 +49,7 @@ if (!empty($email)) {
     }
 </style>
 
-<header id="header" class="header d-flex align-items-center sticky-top bg-white" id="main-navbar">
+<header id="header" class="header d-flex align-items-center sticky-top bg-white">
     <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="/college/users/index" class="logo d-flex align-items-center me-auto me-xl-0">
             <h1 class="sitename text-danger d-none d-lg-flex">Darshan Restaurant</h1>
@@ -63,49 +65,34 @@ if (!empty($email)) {
             </ul>
         </nav>
 
-        <i class="mobile-nav-toggle d-xl-none bi bi-list mb-3 d-flex  justify-content-center"></i>
-    </div>
-
-    <div class=" d-flex align-items-center gap-3 px-4">
+        <i class="mobile-nav-toggle d-xl-none bi bi-list mb-3 d-flex justify-content-center"></i>
 
         <!-- Avatar Dropdown -->
-        <div class="dropdown">
+        <div class="dropdown d-flex align-items-center gap-3 px-4 ">
             <button class="avatar-btn" id="avatarDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="<?= htmlspecialchars($email) ?>">
                 <img src="<?= "../" . htmlspecialchars($imgPath) ?>" alt="User Avatar" class="avatar-img" />
             </button>
-    
+
             <ul class="dropdown-menu shadow" aria-labelledby="avatarDropdown">
-                <li>
-                    <!-- Button trigger modal -->
-                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateProfileImageModal">
-                        Update Profile Image
-                    </a>
-
-                </li>
-                <li><a class="dropdown-item"
-                        data-bs-toggle="modal" data-bs-target="#updatePwModal">
-                        Change Password</a></li>
-                <li>
-                    <a href="#" class="dropdown-item text-danger"
-                        data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-                        Remove Account
-                    </a>
-                </li>
-
+                <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateProfileImageModal">Update Profile Image</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updatePwModal">Change Password</a></li>
+                <li><a href="#" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Remove Account</a></li>
                 <li><a href="/logout" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a></li>
             </ul>
         </div>
-
     </div>
 </header>
-<!-- Modal -->
+
+<!-- ========== Modals ========== -->
+
+<!-- Update Profile Image Modal -->
 <div class="modal fade" id="updateProfileImageModal" tabindex="-1" aria-labelledby="updateProfileImageModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="../includes/update_profile_image.php" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateProfileImageModalLabel">Update Profile Image</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">Update Profile Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <input type="file" name="profile_image" accept="image/*" class="form-control" required>
@@ -118,13 +105,14 @@ if (!empty($email)) {
         </div>
     </div>
 </div>
-<!-- Logout Confirmation Modal -->
+
+<!-- Logout Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-warning">
-                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Confirm Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">Are you sure you want to log out?</div>
             <div class="modal-footer">
@@ -135,11 +123,10 @@ if (!empty($email)) {
     </div>
 </div>
 
-<!-- ===== Password‑change Modal ===== -->
+<!-- Change Password Modal -->
 <div class="modal fade" id="updatePwModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form class="modal-content needs-validation" id="pwForm" novalidate
-            action="../includes/update_password.php" method="post">
+        <form class="modal-content needs-validation" id="pwForm" novalidate action="../includes/update_password.php" method="post">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title">Change Password</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
@@ -165,7 +152,7 @@ if (!empty($email)) {
     </div>
 </div>
 
-<!-- ===== Delete‑account Modal ===== -->
+<!-- Delete Account Modal -->
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <form class="modal-content" action="../includes/delete_account.php" method="post" onsubmit="return confirmFinalDelete()">
@@ -173,18 +160,11 @@ if (!empty($email)) {
                 <h5 class="modal-title">Delete My Account</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-
             <div class="modal-body">
-                <p class="mb-0">
-                    This will permanently delete your account, orders, and profile data.<br>
-                    <strong>This action cannot be undone.</strong>
-                </p>
-                <p class="mt-3">
-                    Please type <code>DELETE</code> below to confirm:
-                </p>
+                <p>This will permanently delete your account, orders, and profile data.<br><strong>This action cannot be undone.</strong></p>
+                <p class="mt-3">Please type <code>DELETE</code> below to confirm:</p>
                 <input type="text" name="confirm_phrase" class="form-control" required>
             </div>
-
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Delete</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -193,12 +173,7 @@ if (!empty($email)) {
     </div>
 </div>
 
-
-<script>
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
-</script>
-<!-- ===== Script (place after Bootstrap bundle) =================== -->
+<!-- JS Validation Scripts -->
 <script>
     (() => {
         const form = document.getElementById('pwForm');
@@ -209,22 +184,18 @@ if (!empty($email)) {
         const rule = /^(?=(?:.*\d){3,})(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{3,}$/;
 
         function validate() {
-            // Check rule on new password
             const ruleOK = rule.test(newPw.value);
             newPw.classList.toggle('is-invalid', !ruleOK);
 
-            // Check match
             const matchOK = newPw.value === confirmPw.value && confirmPw.value !== '';
             confirmPw.classList.toggle('is-invalid', !matchOK);
 
             saveBtn.disabled = !(ruleOK && matchOK && form.checkValidity());
         }
 
-        // live validation
         newPw.addEventListener('input', validate);
         confirmPw.addEventListener('input', validate);
 
-        // standard Bootstrap validation on submit
         form.addEventListener('submit', e => {
             validate();
             if (!form.checkValidity()) {
@@ -234,8 +205,7 @@ if (!empty($email)) {
             form.classList.add('was-validated');
         });
     })();
-</script>
-<script>
+
     function confirmFinalDelete() {
         return confirm("Are you absolutely sure you want to delete your account?");
     }

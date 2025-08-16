@@ -150,7 +150,7 @@
                                 <div class="col-md-12">
                                     <label class="form-label">Rate Your Experience</label>
 
-                                    <!-- Align rating to the left -->
+                    
                                     <div class="rating d-flex justify-content-end flex-row-reverse">
                                         <input type="radio" name="rating" id="star5" value="5" />
                                         <label for="star5" title="5 stars">★</label>
@@ -164,14 +164,13 @@
                                         <label for="star1" title="1 star">★</label>
                                     </div>
 
-                                    <!-- Align this message to the left too -->
-
+                         
                                 </div>
 
 
                                 <div class="col-md-12">
                                     <label for="comments" class="form-label">Your Feedback</label>
-                                    <textarea name="comments" id="comments" class="form-control" rows="5" placeholder="What did you love? What can we improve?" required></textarea>
+                                    <textarea name="comments" id="comments" class="form-control p-3" rows="5" placeholder="What did you love? What can we improve?" required></textarea>
                                     <div class="invalid-feedback">Please share your feedback.</div>
                                 </div>
 

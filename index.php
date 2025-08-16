@@ -196,7 +196,6 @@ shuffle($feedbacks);
             max-width: 300px !important;
             height: 260px !important;
             flex-shrink: 0 !important;
-
             /* Styling */
             background-color: #f8f9fa;
             /* light background */

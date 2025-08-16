@@ -48,32 +48,196 @@ shuffle($feedbacks);
     <!-- Main CSS File -->
     <link href="../assets/css/main.css" rel="stylesheet">
     <style>
-        #animated-heading .line {
-            display: block;
+         .bg-cover {
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Book Now Button Styling */
+        .btn-book-now {
+            border-radius: 50px !important;
+            font-size: 1.1rem !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            background: linear-gradient(45deg, #ce1212, #ff4444) !important;
+            box-shadow: 0 4px 15px rgba(206, 18, 18, 0.3) !important;
+            position: relative;
             overflow: hidden;
         }
 
-        .hero-img {
-            perspective: 1000px;
+        .btn-book-now:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(206, 18, 18, 0.4) !important;
+            background: linear-gradient(45deg, #b01010, #e63939) !important;
         }
 
-        .hero-img img {
-            transform-origin: center;
+        .btn-book-now:active {
+            transform: translateY(0) !important;
+        }
+
+        .btn-book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-book-now:hover::before {
+            left: 100%;
+        }
+
+        .testimonial-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-content p {
+            font-style: italic ;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .stars i {
+            color: gold;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-img {
+            max-width: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Hide scrollbar for WebKit browsers */
+        .testimonials>.d-flex::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge, and Firefox */
+        .testimonials>.d-flex {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         .testimonial-scroll-wrapper {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            scroll-behavior: auto;
-            /* not smooth, animation handles smoothness */
-            scrollbar-width: none;
+            animation: scroll-left 20s linear infinite;
         }
 
-        .testimonial-scroll-wrapper::-webkit-scrollbar {
-            display: none;
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
-    </style>
+
+        .heading-left,
+        .heading-right {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.3s ease;
+        }
+
+        .heading-left {
+            transform: translateX(-120px) translateY(40px);
+        }
+
+        .heading-right {
+            transform: translateX(120px) translateY(40px);
+        }
+
+        #testimonials>div.d-flex.overflow-hidden.px-3 {
+            overflow-x: auto;
+            /* allow horizontal scroll */
+            overflow-y: hidden;
+            /* hide vertical scroll */
+            white-space: nowrap;
+            /* keep inline cards */
+            scroll-behavior: smooth;
+            gap: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Scroll wrapper */
+        .testimonial-scroll-wrapper {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 1rem;
+        }
+
+        /* Each testimonial card fixed size */
+        .testimonial-item {
+            min-width: 300px !important;
+            max-width: 300px !important;
+            height: 260px !important;
+            flex-shrink: 0 !important;
+            /* Styling */
+            background-color: #f8f9fa;
+            /* light background */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image style */
+        .testimonial-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid #007bff;
+        }
+
+        /* Quote paragraph */
+        .testimonial-item p {
+            flex-grow: 1;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1rem;
+            overflow-wrap: break-word;
+        }
+
+        /* Username */
+        .testimonial-item h3 {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Stars */
+        .testimonial-item .stars {
+            color: #ffc107;
+            /* Bootstrap warning color */
+        }
+
+        .testimonial-item p {
+            flex-grow: 1;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+            /* Responsive font size */
+            overflow-wrap: break-word;
+            /* Wrap long words */
+            word-break: break-word;
+            /* Break words if needed */
+            white-space: normal;
+            /* Allow line breaks */
+            line-height: 1.4;
+        }
+        </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
    
@@ -107,15 +271,17 @@ shuffle($feedbacks);
             <div class="container h-100 position-relative" style="z-index: 3;">
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-lg-8 mx-auto text-center text-white position-absolute top-50 start-50 translate-middle" style="z-index: 4;">
-                        <h1 id="animated-heading" class="display-3 fw-bold mb-3">
-                            <span class="d-block text-white heading-left">Enjoy Your Healthy</span>
-                            <span class="d-block text-white heading-right">Delicious Food</span>
+                        <h1  class="display-3 fw-bold mb-3 text-white"  data-aos="fade-up"
+                        data-aos-anchor-placement="bottom-bottom">
+                            Enjoy Your Healthy
+                            Delicious Food
                         </h1>
-                        <p id="animated-text" class="lead mb-4 text-white">
+                        <p  class="lead mb-4 text-white"  data-aos="fade-up"
+                        data-aos-anchor-placement="bottom-bottom">
                             Savor authentic flavors at Darshan Restaurant, where every dish is crafted with fresh ingredients, bold spices, and timeless recipes.
                         </p>
 
-                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center" data-aos="fade-up" >
                             <a href="#book-a-table" class="btn-get-started">Book a Table</a>
                             <a href="https://youtu.be/mqfTD3DzbwY?si=g2ItlnvzsRz9Vl6A" class="glightbox btn-watch-video d-flex align-items-center justify-content-center">
                                 <i class="bi bi-play-circle fs-4"></i>
@@ -454,22 +620,23 @@ shuffle($feedbacks);
         </section><!-- /Chefs Section -->
 
         <!-- Book A Table Section -->
-        <section id="book-a-table" class="book-a-table section">
+          <section id="book-a-table" class="book-a-table section">
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Book A Table</h2>
+                <h2 >Book A Table</h2>
                 <p><span>Book Your</span> <span class="description-title">Stay With Us<br></span></p>
             </div><!-- End Section Title -->
 
             <div class="container py-5">
                 <div class="row g-0 shadow rounded-4 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
                     <!-- Image Section -->
-                    <div class="col-lg-4 d-none d-lg-block bg-cover" style="background-image: url('../assets/img/reservation.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="col-lg-4 d-none d-lg-block bg-cover" style="background-image: url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;"></div>
+
 
                     <!-- Form Section -->
                     <div class="col-lg-8 bg-white p-5">
-                        <h2 class="text-center mb-4 fw-bold text-primary">Book a Table</h2>
-                        <form action="../includes/booking_table.php" method="post" class="needs-validation" novalidate>
+                        <h2 class="text-center mb-4 fw-bold text-dark">Book a Table</h2>
+                        <form action="../includes/booking_table.php" method="post" class=" needs-validation" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <input type="text" name="name" class="form-control form-control-lg" placeholder="Your Name" required>
@@ -504,7 +671,9 @@ shuffle($feedbacks);
                             </div>
 
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm">Book Now</button>
+                                <button class="btn btn-danger btn-lg px-5 py-3 fw-bold btn-book-now">
+                                    <i class="bi bi-calendar-check me-2"></i>Book Now
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -512,7 +681,7 @@ shuffle($feedbacks);
             </div>
 
 
-        </section><!-- /Book A Table Section -->
+        </section>><!-- /Book A Table Section -->
 
         <!-- Gallery Section -->
         <section id="gallery" class="gallery section py-5">
@@ -607,7 +776,7 @@ shuffle($feedbacks);
 
     </main>
 
-    <?php include __DIR__ .'/../footer.php'; ?>
+     <?php include __DIR__ .'/../footer.php'; ?>
 
 
     <!-- Scroll Top -->
@@ -655,7 +824,7 @@ shuffle($feedbacks);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 
-    <script src="../assets/js/gsapanimation.js"></script>
+  
 
 
     <script>

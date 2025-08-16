@@ -45,9 +45,7 @@ bootstrap/cache/
 wp-config.php
 .htaccess
 
-# Database dumps
-*.sql
-*.sqlite
+
 
 # Coverage reports
 coverage/
@@ -62,18 +60,12 @@ coverage/
 *.local
 
 
-# Ignore all image files in assets/img and subfolders
-assets/img/**/*.{png,jpg,jpeg,gif,svg,webp}
 
 
 
-includes/db.php
 
-# Ignore everything inside assets/vendor
-/assets/vendor/
-/assets/vendor/**/*
 
-#Ignore Image files
-/assets/img/**/*.{png,jpg,jpeg,gif,svg,webp}
+
+
 
 **/.DS_Store

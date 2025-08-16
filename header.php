@@ -57,7 +57,7 @@ if ($userType === 'user') {
                 <li><a href="aboutus">About</a></li>
                 <li><a href="menu">Menu</a></li>
                 <li><a href="contactus">Contact</a></li>
-
+            
             </ul>
         </nav>
 

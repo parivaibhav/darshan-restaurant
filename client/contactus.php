@@ -131,7 +131,7 @@
 
             </div>
 
-            <div class="container py-5">
+               <div class="container py-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <form action="../includes/feedback_form.php" method="post" class="needs-validation feedback-form" novalidate>
@@ -152,7 +152,9 @@
 
                                 <div class="col-md-12">
                                     <label class="form-label">Rate Your Experience</label>
-                                    <div class="rating d-flex justify-content-center flex-row-reverse">
+
+                                    <!-- Align rating to the left -->
+                                    <div class="rating d-flex justify-content-end flex-row-reverse">
                                         <input type="radio" name="rating" id="star5" value="5" />
                                         <label for="star5" title="5 stars">★</label>
                                         <input type="radio" name="rating" id="star4" value="4" />
@@ -165,9 +167,10 @@
                                         <label for="star1" title="1 star">★</label>
                                     </div>
 
-                                    <div class=" d-block text-center mt-2">Please rate your experience.</div>
+                                    <!-- Align this message to the left too -->
+
                                 </div>
-                                <div class="rater"></div>
+
 
                                 <div class="col-md-12">
                                     <label for="comments" class="form-label">Your Feedback</label>
